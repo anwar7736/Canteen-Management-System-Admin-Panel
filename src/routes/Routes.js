@@ -1,0 +1,30 @@
+import React, {Component, Fragment} from 'react';
+import {Route, Switch} from 'react-router-dom';
+import Home from '../pages/HomePage';
+import Login from '../pages/LoginPage';
+import EmailVerify from '../pages/EmailVerify';
+import OTPVerify from '../pages/OTPVerify';
+import ForgetPassword from '../pages/ForgetPassword';
+import Contact from '../pages/ContactPage';
+import ChangePassword from '../pages/ChangePassword';
+import NotFound from '../pages/NotFound';
+
+class Routes extends Component {
+    render() {
+        return (
+            <Fragment>
+            <Switch>
+                <Route exact path="/" render={(props)=> <Home {...props} key={ Date.now() } />} />
+                <Route exact path="/admin_login" render={(props)=> <Login {...props} key={ Date.now() } />} />
+                <Route exact path="/email_verification" render={(props)=> <EmailVerify {...props} key={ Date.now() } />} />
+                <Route exact path="/otp_verification" render={(props)=> <OTPVerify {...props} key={ Date.now() } />} />
+                <Route exact path="/forget_password" render={(props)=> <ForgetPassword {...props} key={ Date.now() } />} />
+                <Route exact path="/changePassword" render={(props)=> <ChangePassword {...props} key={ Date.now() } />} />
+               	<Route exact component={NotFound}/>
+            </Switch>
+            </Fragment>
+        );
+    }
+}
+
+export default Routes;
