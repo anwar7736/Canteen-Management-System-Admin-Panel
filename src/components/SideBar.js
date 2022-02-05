@@ -45,9 +45,9 @@ class SideBar extends Component {
         let user = localStorage.getItem('login');
         let login_logout = 
             
-             user==null ? 
+             !user ? 
                 <>
-                     <NavLink><a className="NavItem" to="/admin_login"> <FontAwesomeIcon icon={faPowerOff} /> <span className={this.state.NavText}>Sign In</span></a></NavLink>
+                     <NavLink><Link className="NavItem" to="/admin_login"> <FontAwesomeIcon icon={faPowerOff} /> <span className={this.state.NavText}>Sign In</span></Link></NavLink>
                 </>
              :
              
@@ -60,12 +60,12 @@ class SideBar extends Component {
                 <title>{this.props.title}</title>
                 <Navbar  expand="lg" className="fixed-top shadow-sm bg-white mb-5 py-3" variant="light" bg="white">
                     <Navbar.Brand onClick={this.showHideSideNav} style={{cursor:'pointer'}}><FontAwesomeIcon icon={faBars} /></Navbar.Brand>
-                    <b>Admin Dashboard</b>
+                    <b className="text-danger">Canteen Management System</b>
                 </Navbar>
 
                 <div className={this.state.sideNavClass}>
                     <NavLink> <Link className="NavItem" to="/"> <FontAwesomeIcon icon={faHome} /> <span className={this.state.NavText}>Home</span> </Link></NavLink>
-                    <NavLink><Link className="NavItem" to="/contact"> <FontAwesomeIcon icon={faEnvelope} /> <span className={this.state.NavText}>Contact</span></Link></NavLink>
+                    <NavLink><Link className="NavItem" to="/member"> <FontAwesomeIcon icon={faEnvelope} /> <span className={this.state.NavText}>Member</span></Link></NavLink>
                     <NavLink><Link className="NavItem" to="/course"> <FontAwesomeIcon icon={faBookOpen} /> <span className={this.state.NavText}>Courses</span></Link></NavLink>
                     <NavLink><Link className="NavItem" to="/project"> <FontAwesomeIcon icon={faCode} /> <span className={this.state.NavText}>Projects</span></Link></NavLink>
                     <NavLink><Link className="NavItem" to="/services"> <FontAwesomeIcon icon={faFolder} /> <span className={this.state.NavText}>Services</span></Link></NavLink>
@@ -79,7 +79,6 @@ class SideBar extends Component {
                 <div onClick={this.showHideSideNav} className={this.state.mainDivOverlay}>
 
                 </div>
-
                 <div className="mainDiv">
                     {this.props.children}
                      <ToastContainer/>

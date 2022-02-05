@@ -38,22 +38,23 @@ class LoginPage extends Component {
     }
     AdminLogin=(e)=>{
         e.preventDefault();
-        var user = this.state.username;
-        var pass = this.state.password;
-        if(user=='')
+
+        const {username, password} = this.state;
+
+        if(username=='')
         {
             cogoToast.warn('Username field is required!');
         } 
-        else if(pass=='')
+        else if(password=='')
         {
             cogoToast.warn('Password field is required!');
         }
 
         else
         {
-            var MyForm = new FormData();
-            MyForm.append('username', user);
-            MyForm.append('password', pass);
+            const MyForm = new FormData();
+            MyForm.append('username', username);
+            MyForm.append('password', password);
 
             Axios.post(API.login, MyForm)
             .then(response=>{
@@ -61,7 +62,8 @@ class LoginPage extends Component {
                 {
                     cogoToast.success('Login Successfully');
                     setTimeout(()=>{
-                        localStorage.setItem('login', user);
+                        localStorage.setItem('login', username);
+                        localStorage.setItem('id', response.data['id']);
                         this.setState({redirectStatus:true});
                     },1000);
                 }

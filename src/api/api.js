@@ -6,6 +6,7 @@ class api {
 	static OTPVerification   = this.baseURL + "OTPVerification";
 	static ResetPassword   = this.baseURL + "ResetPassword";
 	static ChangePassword   = this.baseURL + "ChangePassword";
+	static AllMembers   = this.baseURL + "all_members";
 }
 
 export default api;
