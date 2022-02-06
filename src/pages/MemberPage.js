@@ -29,10 +29,11 @@ class MemberPage extends Component {
             password : '',
             email : '',
             phone : '',
-            role : '',
-            status : '',
+            role : 'user',
+            status : 'active',
             address : '',
             picture : '',
+            token_no : '',
             selectedID : '',
 			addNewModal : false,          
             headerTitle : '',
@@ -65,13 +66,16 @@ class MemberPage extends Component {
 
     resetForm=()=>{
         this.setState({
-            projectName : '',
-            projectDes : '',
-            projectFeatures : '',
-            projectLink : '',
-            long_des : '',
-            photoOne : '',
-            photoTwo : '',
+            name : '',
+            username : '',
+            email : '',
+            phone : '',
+            password : '',
+            photo : '',
+            previewImg : '',
+            address : '',
+            status : 'active',
+            role : 'user',
         });
     }
 
@@ -87,17 +91,23 @@ class MemberPage extends Component {
         else if(action==='Update')
         {
             this.setState({previewImg : ''});
-            Axios.get('/GetProjectById/'+this.state.selectedID)
+            const id = this.state.selectedID;
+            Axios.get(API.ViewMember + id)
             .then(response=>{
                 if(response.status==200)
                 {
                     this.setState({
-                        projectName : response.data[0]['project_name'],
-                        projectDes : response.data[0]['short_description'],
-                        projectFeatures : response.data[0]['project_features'],
-                        projectLink : response.data[0]['live_preview'],
-                        long_des : response.data[0]['img_one'],
-                        photoOne : response.data[0]['img_two']
+                        name : response.data['name'],
+                        username : response.data['username'],
+                        password : response.data['password'],
+                        email : response.data['email'],
+                        phone : response.data['phone'],
+                        address : response.data['address'],
+                        photo : response.data['photo'],
+                        status : response.data['status'],
+                        role : response.data['role'],
+                        token_no : response.data['token_no'],
+
                     });
                 }
 
@@ -125,7 +135,7 @@ class MemberPage extends Component {
 
     SubmitForm=(event)=>{
         event.preventDefault();
-        const {action, name, username, password, email, phone, role, status, address, photo, previewImg} = this.state;
+        const {action, name, username, password, token_no, email, phone, role, status, address, picture, previewImg} = this.state;
         if(action==='Insert')
         {
             if(name=='')
@@ -158,10 +168,17 @@ class MemberPage extends Component {
             }
             else{
             this.setState({submitBtnText:'Submitting...'});
-            let myFormData=new FormData();
-            window.alert('OK');
-            let url="/AddProject";
-            Axios.post(url,myFormData)
+            let myFormData = new FormData();
+            myFormData.append('name', name);
+            myFormData.append('username', username);
+            myFormData.append('password', password);
+            myFormData.append('email', email);
+            myFormData.append('phone', phone);
+            myFormData.append('photo', picture);
+            myFormData.append('address', address);
+            myFormData.append('role', role);
+            myFormData.append('status', status);
+            Axios.post(API.AddMember,myFormData)
                 .then(response=>{
                     if(response.status==200)
                     {
@@ -173,21 +190,14 @@ class MemberPage extends Component {
                                 this.resetForm();
                                 this.modalClose();
                                 this.componentDidMount();
-                                cogoToast.success('Data has been added');
+                                cogoToast.success('Member has been inserted');
 
                             },1000);
 
                         }
-                         else if(response.data!=1 && response.data!=0){
-                         toast.warn(response.data, {
-                            position: "top-right",
-                            autoClose: 3000,
-                            hideProgressBar: false,
-                            closeOnClick: true,
-                            pauseOnHover: false,
-                            draggable: true,
-                            progress: 0,
-                        });
+                         else{
+                          this.setState({submitBtnText:'Submit'});
+                          cogoToast.error('Something went wrong!');
                     }
                     }
                 })
@@ -231,10 +241,21 @@ class MemberPage extends Component {
 
     else{
     this.setState({submitBtnText:'Updating...'});
-    let myFormData=new FormData();
+     const id = this.state.selectedID;
+    let myFormData = new FormData();
+        myFormData.append('id', id);
+        myFormData.append('name', name);
+        myFormData.append('username', username);
+        myFormData.append('password', password);
+        myFormData.append('email', email);
+        myFormData.append('phone', phone);
+        myFormData.append('photo', picture);
+        myFormData.append('address', address);
+        myFormData.append('role', role);
+        myFormData.append('status', status);
+        myFormData.append('token_no', token_no);
 
-    let url="/api/onEditProject";
-    Axios.post(url,myFormData)
+    Axios.post(API.EditMember,myFormData)
         .then(response=>{
             if(response.status==200)
             {
@@ -246,33 +267,20 @@ class MemberPage extends Component {
                         this.resetForm();
                         this.modalClose();
                         this.componentDidMount();
-                        cogoToast.success('Data has been updated');
+                        cogoToast.success('Member has been updated');
 
                     },1000);
 
                 }
-                else if(response.data==0)
+                else
                 {
                         setTimeout(()=>{
                         this.setState({submitBtnText:'Update'});
-                        cogoToast.info('Data is nothing to updated');
+                        cogoToast.info(response.data);
 
                     },1000);
 
                 }
-
-                else if(response.data!=1 && response.data!=0){
-                    this.setState({submitBtnText:'Update'});
-                    toast.warn(response.data, {
-                       position: "top-right",
-                       autoClose: 3000,
-                       hideProgressBar: false,
-                       closeOnClick: true,
-                       pauseOnHover: false,
-                       draggable: true,
-                       progress: 0,
-                   });
-               }
             }
         })
         .catch(error=>{
@@ -283,12 +291,13 @@ class MemberPage extends Component {
 
     }
 }
-	onClick=()=>{
-		if(this.state.selectedID!==null){
-			if(window.confirm('Do you want to delete this data?')){
-			Axios.post('/ProjectDelete', {id: this.state.selectedID})
+	onDelete=()=>{
+        const id = this.state.selectedID;
+		if(id!==null){
+			if(window.confirm('Do you want to delete this member?')){
+			Axios.get(API.DeleteMember + id)
 			.then(response=>{
-					cogoToast.success('Data has been deleted');
+					cogoToast.success('Member has been deleted');
 					this.componentDidMount();
 					this.setState({selectedID:''})
 			})
@@ -336,7 +345,7 @@ class MemberPage extends Component {
         }
         else{
 		const allData = this.state.Data;
-        const {name, username, password, email, phone, role, status, address, photo, previewImg} = this.state;
+        const {name, username, password, token_no, email, phone, role, status, address, photo, previewImg} = this.state;
 		const columns = [
          {dataField: 'photo', text: 'Profile Picture',formatter:this.imgCellFormat},
 		 {dataField: 'token_no', text: 'Token No.'},
@@ -359,7 +368,7 @@ class MemberPage extends Component {
                     <h2 className="text-center text-danger">All Member List</h2>
                     <Button onClick={this.modalOpen.bind(this, 'Insert')} variant="success" className="btn-sm mr-2">Add</Button>
                 	<Button onClick={this.modalOpen.bind(this, 'Update')} variant="info" className="btn-sm ml-2" disabled={this.state.isDisabled}>Edit</Button>
-                	<Button onClick={this.onClick} variant="danger" className="btn-sm ml-2" disabled={this.state.isDisabled}>Delete</Button><br/><br/>
+                	<Button onClick={this.onDelete} variant="danger" className="btn-sm ml-2" disabled={this.state.isDisabled}>Delete</Button><br/><br/>
                 	<BootstrapTable 
                 		keyField='id' 
                 		data={ allData } 
@@ -379,6 +388,10 @@ class MemberPage extends Component {
                                 <Form.Group >
                                     <Form.Label>Name </Form.Label>
                                     <Form.Control value={name} onChange={(e)=>this.setState({name : e.target.value})} type="text" placeholder="Member Name..." />
+                                </Form.Group>
+                                <Form.Group className={previewImg}>
+                                    <Form.Label>Token No. </Form.Label>
+                                    <Form.Control value={token_no} onChange={(e)=>this.setState({token_no : e.target.value})} type="text" placeholder="Member Token No...." />
                                 </Form.Group>
                                 <Form.Group >
                                     <Form.Label>Username</Form.Label>
@@ -418,7 +431,7 @@ class MemberPage extends Component {
                                 <Form.Group >
                                     <Form.Label>Profile Picture</Form.Label>
                                     <Form.Control onChange={this.onPhotoChange} type="file" />
-                                    <img className={previewImg + " mt-3"} src={this.state.previewImg} width="100" height="100"/>
+                                    <img className={previewImg + " mt-3"} src={photo} width="100" height="100"/>
                                 </Form.Group>
 
                                 <Button className="btn-block" variant="info" type="submit">

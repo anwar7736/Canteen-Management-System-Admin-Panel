@@ -7,6 +7,10 @@ class api {
 	static ResetPassword   = this.baseURL + "ResetPassword";
 	static ChangePassword   = this.baseURL + "ChangePassword";
 	static AllMembers   = this.baseURL + "all_members";
+	static AddMember   = this.baseURL + "add_member";
+	static ViewMember   = this.baseURL + "view_member_by_id/";
+	static EditMember   = this.baseURL + "edit_member";
+	static DeleteMember   = this.baseURL + "delete_member/";
 }
 
 export default api;
