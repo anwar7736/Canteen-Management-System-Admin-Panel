@@ -308,6 +308,10 @@ class MemberPage extends Component {
 	}
 
 	}
+
+    printToken=()=>{
+        window.print();
+    }
 	imgCellFormat=(cell, rowIndex)=>{
 		return <img className="table-cell-img" src={cell}/>
 	}
@@ -368,7 +372,8 @@ class MemberPage extends Component {
                     <h2 className="text-center text-danger">All Member List</h2>
                     <Button onClick={this.modalOpen.bind(this, 'Insert')} variant="success" className="btn-sm mr-2">Add</Button>
                 	<Button onClick={this.modalOpen.bind(this, 'Update')} variant="info" className="btn-sm ml-2" disabled={this.state.isDisabled}>Edit</Button>
-                	<Button onClick={this.onDelete} variant="danger" className="btn-sm ml-2" disabled={this.state.isDisabled}>Delete</Button><br/><br/>
+                	<Button onClick={this.onDelete} variant="danger" className="btn-sm ml-2" disabled={this.state.isDisabled}>Delete</Button>
+                    <Button onClick={this.printToken} variant="primary" className="btn-sm ml-2" disabled={this.state.isDisabled}>Print Token</Button><br/><br/>
                 	<BootstrapTable 
                 		keyField='id' 
                 		data={ allData } 

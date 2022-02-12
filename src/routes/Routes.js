@@ -8,6 +8,8 @@ import ForgetPassword from '../pages/ForgetPassword';
 import Contact from '../pages/ContactPage';
 import ChangePassword from '../pages/ChangePassword';
 import MemberPage from '../pages/MemberPage';
+import DailyMealItem from '../pages/DailyMealItem';
+import SendNotification from '../pages/SendNotification';
 
 
 import NotFound from '../pages/NotFound';
@@ -24,6 +26,8 @@ class Routes extends Component {
                 <Route exact path="/forget_password" render={(props)=> <ForgetPassword {...props} key={ Date.now() } />} />
                 <Route exact path="/changePassword" render={(props)=> <ChangePassword {...props} key={ Date.now() } />} />
                 <Route exact path="/member" render={(props)=> <MemberPage {...props} key={ Date.now() } />} />
+                <Route exact path="/daily_meal_item" render={(props)=> <DailyMealItem {...props} key={ Date.now() } />} />
+                <Route exact path="/send_notification" render={(props)=> <SendNotification {...props} key={ Date.now() } />} />
                	
 
 

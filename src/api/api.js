@@ -11,6 +11,13 @@ class api {
 	static ViewMember   = this.baseURL + "view_member_by_id/";
 	static EditMember   = this.baseURL + "edit_member";
 	static DeleteMember   = this.baseURL + "delete_member/";
+	static GetDailyMealItem   = this.baseURL + "GetDailyMealItem";
+	static GetMealRate   = this.baseURL + "GetMealRate";
+	static ChangeMealRate   = this.baseURL + "ChangeMealRate";
+	static DayWiseMealItemById   = this.baseURL + "DayWiseMealItemById/";
+	static EditDayWiseMealItem   = this.baseURL + "EditDayWiseMealItem";
+
+
 }
 
 export default api;

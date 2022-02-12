@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react';
 import {Navbar,NavLink} from "react-bootstrap";
 import {Redirect} from 'react-router';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faBars, faHome,faEnvelope,faBookOpen,faCode,faFolder,faComment,faPowerOff, faKey} from "@fortawesome/free-solid-svg-icons";
+import {faBars, faHeart, faHome,faEnvelope,faBookOpen,faCode,faFolder,faComment,faPowerOff, faKey} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 class SideBar extends Component {
@@ -65,12 +65,17 @@ class SideBar extends Component {
 
                 <div className={this.state.sideNavClass}>
                     <NavLink> <Link className="NavItem" to="/"> <FontAwesomeIcon icon={faHome} /> <span className={this.state.NavText}>Home</span> </Link></NavLink>
+                    <NavLink><Link className="NavItem" to="/daily_meal_item"> <FontAwesomeIcon icon={faBookOpen} /> <span className={this.state.NavText}>Notification</span></Link></NavLink>
                     <NavLink><Link className="NavItem" to="/member"> <FontAwesomeIcon icon={faEnvelope} /> <span className={this.state.NavText}>Member</span></Link></NavLink>
-                    <NavLink><Link className="NavItem" to="/course"> <FontAwesomeIcon icon={faBookOpen} /> <span className={this.state.NavText}>Courses</span></Link></NavLink>
-                    <NavLink><Link className="NavItem" to="/project"> <FontAwesomeIcon icon={faCode} /> <span className={this.state.NavText}>Projects</span></Link></NavLink>
-                    <NavLink><Link className="NavItem" to="/services"> <FontAwesomeIcon icon={faFolder} /> <span className={this.state.NavText}>Services</span></Link></NavLink>
-                    <NavLink><Link className="NavItem" to="/review"> <FontAwesomeIcon icon={faComment} /> <span className={this.state.NavText}>Review</span></Link></NavLink>
+                    <NavLink><Link className="NavItem" to="/daily_meal_item"> <FontAwesomeIcon icon={faBookOpen} /> <span className={this.state.NavText}>Daily Meal Item</span></Link></NavLink> 
+                    <NavLink><Link className="NavItem" to="/send_notification"> <FontAwesomeIcon icon={faHeart} /> <span className={this.state.NavText}>Send Notification</span></Link></NavLink>
+                    <NavLink><Link className="NavItem" to="/services"> <FontAwesomeIcon icon={faFolder} /> <span className={this.state.NavText}>Make Payment</span></Link></NavLink>
+                    <NavLink><Link className="NavItem" to="/review"> <FontAwesomeIcon icon={faComment} /> <span className={this.state.NavText}>Order Daily Meal</span></Link></NavLink>
+                    <NavLink><Link className="NavItem" to="/review"> <FontAwesomeIcon icon={faComment} /> <span className={this.state.NavText}>Daily Bazar Cost</span></Link></NavLink>
+                    <NavLink><Link className="NavItem" to="/review"> <FontAwesomeIcon icon={faComment} /> <span className={this.state.NavText}>Database Backup</span></Link></NavLink>
                     <NavLink><Link className="NavItem" to="/changePassword"> <FontAwesomeIcon icon={faKey} /> <span className={this.state.NavText}>Change Password</span></Link></NavLink>
+                    <NavLink><Link className="NavItem" to="/review"> <FontAwesomeIcon icon={faComment} /> <span className={this.state.NavText}>Reports</span></Link></NavLink>
+                    <NavLink><Link className="NavItem" to="/changePassword"> <FontAwesomeIcon icon={faKey} /> <span className={this.state.NavText}>Settings</span></Link></NavLink>
                    {
                        login_logout
                    }
