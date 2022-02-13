@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap');
+@import url('navMenu.css');
+@import url('card.css');
+@import url('button.css');
+@import url('form.css');
+@import url('dashboard.css');
+@import url('table.css');
+@import url('modal.css');
+@import url('images.css');
+@import url('transaction.css');
+
+body {
+  font-weight: 300;
+  font-size: 14px;
+  background-color: #EFF0F4 !important;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+.footer {
+   position: fixed;
+   left:0;
+   bottom:0;
+   right:0;
+   width: 100%;
+   background-color: #f21bb2;
+   color: white;
+   text-align: center;
+}
+
+a {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+a:hover {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+.bg-site{
+  background-color:#C23272 !important;
+}
+
+.login-div{
+  padding: 50px 50px 50px 50px !important;
+}

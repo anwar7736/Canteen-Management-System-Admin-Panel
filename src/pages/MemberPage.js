@@ -369,19 +369,20 @@ class MemberPage extends Component {
         return (
             <Fragment>
                 <SideBar title="Projects">
-                    <h2 className="text-center text-danger">All Member List</h2>
-                    <Button onClick={this.modalOpen.bind(this, 'Insert')} variant="success" className="btn-sm mr-2">Add</Button>
-                	<Button onClick={this.modalOpen.bind(this, 'Update')} variant="info" className="btn-sm ml-2" disabled={this.state.isDisabled}>Edit</Button>
-                	<Button onClick={this.onDelete} variant="danger" className="btn-sm ml-2" disabled={this.state.isDisabled}>Delete</Button>
-                    <Button onClick={this.printToken} variant="primary" className="btn-sm ml-2" disabled={this.state.isDisabled}>Print Token</Button><br/><br/>
-                	<BootstrapTable 
-                		keyField='id' 
-                		data={ allData } 
-                		columns={ columns } 
-                		pagination={ paginationFactory() } 
-                		selectRow={ selectRow }
-
-                	/>
+                    <div className="animated zoomIn">
+                        <h2 className="text-center text-danger">All Member List</h2>
+                        <Button onClick={this.modalOpen.bind(this, 'Insert')} variant="success" className="btn-sm mr-2">Add</Button>
+                        <Button onClick={this.modalOpen.bind(this, 'Update')} variant="info" className="btn-sm ml-2" disabled={this.state.isDisabled}>Edit</Button>
+                        <Button onClick={this.onDelete} variant="danger" className="btn-sm ml-2" disabled={this.state.isDisabled}>Delete</Button>
+                        <Button onClick={this.printToken} variant="primary" className="btn-sm ml-2" disabled={this.state.isDisabled}>Print Token</Button><br/><br/>
+                        <BootstrapTable 
+                            keyField='id' 
+                            data={ allData } 
+                            columns={ columns } 
+                            pagination={ paginationFactory() } 
+                            selectRow={ selectRow } /> 
+                   
+                    </div>
                 </SideBar>
                 <Modal scrollable={true} show={this.state.addNewModal} onHide={this.addNewModal}>
                         <Modal.Header>

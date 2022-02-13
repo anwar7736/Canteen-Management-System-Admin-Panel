@@ -64,6 +64,8 @@ class LoginPage extends Component {
                     setTimeout(()=>{
                         localStorage.setItem('login', username);
                         localStorage.setItem('id', response.data['id']);
+                        localStorage.setItem('email', response.data['email']);
+                        localStorage.setItem('phone', response.data['phone']);
                         this.setState({redirectStatus:true});
                     },1000);
                 }
@@ -89,7 +91,7 @@ class LoginPage extends Component {
         return (
             <Fragment>
                 <SideBar title="Admin Login">
-                    <Container>
+                    <Container className="animated zoomIn">
                         <Row>
                             <Col xl={6} lg={6} md={{w:8, offset:3}} sm={12} xs={12}>
                                 <h2 className="text-danger mb-4 text-center">Admin Login</h2>

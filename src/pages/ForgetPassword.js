@@ -113,7 +113,7 @@ class ForgetPassword extends Component {
         return (
             <Fragment>
                 <SideBar title="Reset Password">
-                    <Container>
+                    <Container className="animated zoomIn">
                         <Row>
                             <Col xl={6} lg={6} md={{w:8, offset:3}} sm={12} xs={12}>
                                 <h4 className="text-danger mb-4">Step 03 : Reset Password</h4>

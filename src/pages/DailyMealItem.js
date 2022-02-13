@@ -24,8 +24,15 @@ class DailyMealItem extends React.Component{
 		lunch_item : '',
 		dinner_item : '',
 		item_id : '',
+		redirectStatus : false,
 	}
 	componentDidMount(){
+		let user = localStorage.getItem('login');
+        if(user==null)
+        {
+            this.setState({redirectStatus: true});
+        }
+
 		Axios.get(API.GetDailyMealItem)
 		.then(res=>{
 			if(res.status==200 && res.data!=0)
@@ -163,6 +170,16 @@ class DailyMealItem extends React.Component{
     handleItemClose=()=>{
         this.setState({ showMeal:false});
     }
+
+   RedirectToLogin=()=>{
+        if(this.state.redirectStatus===true)
+        {
+            return(
+                <Redirect to="/admin_login" />
+            )
+        }
+    }
+
  render(){
  	const {data,btnText,show,lunch_expiry_time,dinner_expiry_time,lunch_rate, lunch_rate_bangla, dinner_rate, dinner_rate_bangla,showMeal, lunch_item, dinner_item, day} = this.state;
  	let serial = 1;
@@ -182,7 +199,7 @@ class DailyMealItem extends React.Component{
  	return(
  		<Fragment>
  		<SideBar title="Contact">
- 			<div className="mt-3" style={{marginBottom:'100px'}}>
+ 			<div className="mt-3 animated zoomIn" style={{marginBottom:'100px'}}>
  					<center>
 	 					<h6 className="text-muted">দুপুরের খাবার গ্রহণের শেষ সময়ঃ <span className="text-danger">{lunch_expiry_time}</span></h6><br/>
 	 					<h6 className="text-muted">রাতের খাবার গ্রহণের শেষ সময়ঃ <span className="text-success">{dinner_expiry_time}</span></h6><br/>
@@ -259,6 +276,7 @@ class DailyMealItem extends React.Component{
                         </button>
                     </Modal.Footer>
             </Modal>
+             {this.RedirectToLogin()}
  		</Fragment>
  		)
  	

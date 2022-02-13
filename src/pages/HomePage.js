@@ -24,15 +24,15 @@ class HomePage extends Component {
             this.setState({redirectStatus: true});
         }
 
-                        toast.success('Welcome to our website!', {
-                        position: "top-center",
-                        autoClose: 3000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: false,
-                        draggable: true,
-                        progress: 0,
-                                });
+        toast.success('Welcome to our website!', {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: 0,
+                });
         Axios.get('/CountSummary').then((response)=>{
             if(response.status==200){
                 this.setState({dataList:response.data,isLoading:false,isError:false})
@@ -63,22 +63,12 @@ class HomePage extends Component {
                     </SideBar>
                 )
         }
-        else if(this.state.isError==true && this.state.isLoading==false)
-        {
-              return (
-                    <SideBar title="Home">   
-                        <Container>
-                            <WentWrong/>
-                        </Container>
-                    </SideBar>
-                )
-        }
-        else{
+
     	const data = this.state.dataList;
         return (
             <Fragment>
             	<SideBar title="Home">
-                		 <Container fluid={true}>
+                		 <Container fluid={true} className="animated zoomIn">
                             <Row>
                                 <Col className="p-2" md={3} log={3} sm={6}>
                                     <Card className="card bg-success">
@@ -126,7 +116,7 @@ class HomePage extends Component {
                 {this.RedirectToLogin()}
             </Fragment>
         );
-    }
+    
     }
 }
 

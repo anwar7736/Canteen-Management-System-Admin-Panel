@@ -1,0 +1,32 @@
+.cat-icon{
+    width: 60px;
+    height: 60px;
+    object-fit: scale-down;
+}
+.product-img{
+    width: 80px;
+    height: 80px;
+    object-fit: scale-down;
+}
+.cart-image{
+    width: 60px;
+    height: 60px;
+    object-fit: scale-down;
+}
+.table-cell-img{
+	height: 100px;
+	width: 100px;
+}
+.prevIMG{
+    height:  130px;
+    width: 130px;
+    margin:  auto;
+    border : 2px solid red;
+    border-radius: 50%;
+}
+.token_preview{
+    margin-bottom: 100px;
+}
+.token_section{
+    margin:auto;
+}

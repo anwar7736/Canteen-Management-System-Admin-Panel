@@ -5,11 +5,11 @@ import Login from '../pages/LoginPage';
 import EmailVerify from '../pages/EmailVerify';
 import OTPVerify from '../pages/OTPVerify';
 import ForgetPassword from '../pages/ForgetPassword';
-import Contact from '../pages/ContactPage';
 import ChangePassword from '../pages/ChangePassword';
 import MemberPage from '../pages/MemberPage';
 import DailyMealItem from '../pages/DailyMealItem';
 import SendNotification from '../pages/SendNotification';
+import OrderDailyMeal from '../pages/OrderDailyMeal';
 
 
 import NotFound from '../pages/NotFound';
@@ -28,6 +28,7 @@ class Routes extends Component {
                 <Route exact path="/member" render={(props)=> <MemberPage {...props} key={ Date.now() } />} />
                 <Route exact path="/daily_meal_item" render={(props)=> <DailyMealItem {...props} key={ Date.now() } />} />
                 <Route exact path="/send_notification" render={(props)=> <SendNotification {...props} key={ Date.now() } />} />
+                <Route exact path="/order_daily_meal" render={(props)=> <OrderDailyMeal {...props} key={ Date.now() } />} />
                	
 
 

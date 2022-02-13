@@ -1,0 +1,54 @@
+.form-control:focus {
+    border-color: #C23272 !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+.form-control{
+    border: none;
+    box-shadow: none;
+    font-size:13px;
+    font-weight:500;
+    font-family: 'Roboto Condensed', sans-serif;
+    border-radius: 3px !important;
+}
+.form-select:focus {
+    border-color: #C23272 !important;
+    box-shadow: none !important;;
+}
+.form-select{
+    box-shadow: none;
+    font-size:14px;
+    font-weight:300;
+    padding: 10px;
+    border-radius: 0% !important;
+}
+
+.form-label{
+    font-size:12px;
+    font-weight:500;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.form-label{
+    font-size: 13px;
+    font-weight: 400;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+.row{
+   margin-left: 1000px;
+}
+input[type=text], input[type=password], textarea{
+    border:1px solid green !important;
+}
+
+.profile-photo{
+    height: 35px ;
+    width: 35px;
+    border-radius: 50%;
+    border: 1px solid red;
+}
+.profile-image{
+    height: 120px ;
+    width: 120px;
+    border: 1px solid red;
+}

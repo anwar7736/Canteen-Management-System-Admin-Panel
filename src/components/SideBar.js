@@ -70,7 +70,7 @@ class SideBar extends Component {
                     <NavLink><Link className="NavItem" to="/daily_meal_item"> <FontAwesomeIcon icon={faBookOpen} /> <span className={this.state.NavText}>Daily Meal Item</span></Link></NavLink> 
                     <NavLink><Link className="NavItem" to="/send_notification"> <FontAwesomeIcon icon={faHeart} /> <span className={this.state.NavText}>Send Notification</span></Link></NavLink>
                     <NavLink><Link className="NavItem" to="/services"> <FontAwesomeIcon icon={faFolder} /> <span className={this.state.NavText}>Make Payment</span></Link></NavLink>
-                    <NavLink><Link className="NavItem" to="/review"> <FontAwesomeIcon icon={faComment} /> <span className={this.state.NavText}>Order Daily Meal</span></Link></NavLink>
+                    <NavLink><Link className="NavItem" to="/order_daily_meal"> <FontAwesomeIcon icon={faComment} /> <span className={this.state.NavText}>Order Daily Meal</span></Link></NavLink>
                     <NavLink><Link className="NavItem" to="/review"> <FontAwesomeIcon icon={faComment} /> <span className={this.state.NavText}>Daily Bazar Cost</span></Link></NavLink>
                     <NavLink><Link className="NavItem" to="/review"> <FontAwesomeIcon icon={faComment} /> <span className={this.state.NavText}>Database Backup</span></Link></NavLink>
                     <NavLink><Link className="NavItem" to="/changePassword"> <FontAwesomeIcon icon={faKey} /> <span className={this.state.NavText}>Change Password</span></Link></NavLink>
