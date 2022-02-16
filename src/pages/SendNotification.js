@@ -6,6 +6,7 @@ import {Redirect} from 'react-router-dom';
 import {Link} from "react-router-dom";
 import Axios from 'axios';
 import SideBar from '../components/SideBar';
+import DataTable from "react-data-table-component";
 
 class SendNotification extends React.Component{
 	state = {
@@ -21,6 +22,9 @@ class SendNotification extends React.Component{
 		sender_mobile : '',
 		sender_email : '',
 		receivers : '',
+		data : [],
+		show : false,
+		editID : '',
 	}
 
 	componentDidMount()
@@ -36,6 +40,14 @@ class SendNotification extends React.Component{
         else{
         	this.setState({author_id: id, sender_email:email, sender_mobile:phone});
         }
+
+        Axios.get(API.GetAllNotificationForAdmin + id)
+        .then(res=>{
+        	this.setState({data : res.data});
+        })
+        .catch(err=>{
+
+        });
 	}
 
 	SendMessage=(e)=>{
@@ -186,18 +198,139 @@ class SendNotification extends React.Component{
     }
 }
 
+handleOpen=()=>{
+	this.setState({show:true});
+}
+
+handleClose=()=>{
+	this.setState({show:false});
+	this.clearForm();
+}
+
 clearForm=()=>{
 	this.setState({author_name : '', msg_title : '', msg_body : '', receivers : ''});
 }
 
+editIconOnClick=(id)=>{
+	this.setState({editID : id});
+	Axios.get(API.GetNotification + id)
+	.then(res=>{
+		this.setState({
+			author_name : res.data[0].author_name,
+			msg_title : res.data[0].msg_title,
+			msg_body : res.data[0].msg_body,
+		});
+	}).
+	catch(err=>{
+
+	});
+
+	this.handleOpen();
+}
+
+deleteIconOnClick=(id)=>{
+	Axios.get(API.DeleteNotification + id)
+	.then(res=>{
+		if(res.status == 200 && res.data == 1)
+			{
+				cogoToast.success('Notification has been deleted!');
+				this.componentDidMount();
+			}
+			else{
+				cogoToast.error('Something went wrong!');
+			}
+	})
+	.catch(err=>{
+		cogoToast.error('Something went wrong!');
+	});
+}
+
+EditNotification=()=>{
+	const{editID, author_name, msg_title, msg_body} = this.state;
+	if(msg_title=='')
+		{
+			 cogoToast.error('Message title field is required!')
+		}
+
+	else if(msg_body=='')
+	{
+		 cogoToast.error('Message description field is required!')
+	}
+	else {
+			let myForm = new FormData();
+			myForm.append('notify_id', editID);
+			myForm.append('author_name', author_name);
+			myForm.append('msg_title', msg_title);
+			myForm.append('msg_body', msg_body);
+		Axios.post(API.EditNotification, myForm)
+		.then(res=>{
+			if(res.status == 200 && res.data == 1)
+			{
+				cogoToast.success('Notification has been updated');
+				this.clearForm();
+				this.handleClose();
+				this.componentDidMount();
+			}
+			else{
+				cogoToast.error('Something went wrong!');
+			}
+		})
+		.catch(err=>{
+			cogoToast.error('Something went wrong!');
+		})
+	}
+}
+
  render(){
- 	const {showReceiver, customChecked, allChecked, author_name, msg_title, msg_body, sender_email, sender_mobile, receivers} = this.state;
+ 	const {data, show, showReceiver, customChecked, allChecked, author_name, msg_title, msg_body, sender_email, sender_mobile, receivers} = this.state;
+ 	const columns = [
+            {
+                name: 'Author',
+                selector: 'author_name',
+                sortable: true,
+
+            },
+            {
+                name: 'Title',
+                selector: 'msg_title',
+                sortable: true,
+            },
+            {
+                name: 'Message',
+                selector: 'msg_body',
+                sortable: true,
+            },
+            {
+                name: 'Date',
+                selector: 'create_date',
+                sortable: true,
+            }, 
+            {
+                name: 'Delete',
+                selector: 'id',
+                sortable: false,
+                cell: row => <button onClick={()=>{
+                    if(window.confirm('Do you want to delete today order?')) 
+                    {
+                        this.deleteIconOnClick(row.id);
+                    }
+                   }
+                }
+                  className="btn btn-sm text-danger"><i className="fa fa-trash-alt"/></button>
+            },
+            {
+                name: 'Edit',
+                selector: 'id',
+                sortable: false,
+                cell: row => <button onClick={this.editIconOnClick.bind(this,row.id)}  className="btn btn-sm text-success"><i className="fa fa-edit"/></button>
+            },
+        ];
  	return(
  		<Fragment>
  		<SideBar title="Contact">
 			<div class="row animated zoomIn">
 				<div class="col-md-6 container-fluid m-4">
-			<h4><center>Send Notification</center></h4>
+			<h4 className="text-danger"><center>Send Notification</center></h4>
 			<hr/>
 			  <div class="tab">
 			    <button class="tablinks active" onClick={(event)=>this.sendVia(event, 'database')}>Database</button>
@@ -263,36 +396,38 @@ clearForm=()=>{
 			</div>
 			</div>
 			<div class="col-md-5 m-4">
-			<h4>All Notification List</h4>
-			  <table class="table table-dark">
-			    <thead>
-			      <tr>
-			        <th>Firstname</th>
-			        <th>Lastname</th>
-			        <th>Email</th>
-			      </tr>
-			    </thead>
-			    <tbody>
-			      <tr>
-			        <td>John</td>
-			        <td>Doe</td>
-			        <td>john@example.com</td>
-			      </tr>
-			      <tr>
-			        <td>Mary</td>
-			        <td>Moe</td>
-			        <td>mary@example.com</td>
-			      </tr>
-			      <tr>
-			        <td>July</td>
-			        <td>Dooley</td>
-			        <td>july@example.com</td>
-			      </tr>
-			    </tbody>
-			  </table>
+			<h4 className="text-danger"><center>All Sending Notification List</center></h4><hr/>
+				  <DataTable
+	                noHeader={true}
+	                paginationPerPage={5}
+	                pagination={true}
+	                columns={columns}
+	                data={data} />
 			</div>
 			</div>
  		</SideBar>
+ 		<Modal scrollable={true} animation={false} className="animated zoomIn" show={show} onHide={show}>
+                    <Modal.Header>
+                        <strong><p className="text-danger">Edit Notification</p></strong>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <label className="form-label"><b>Author Name</b></label>
+                        <input value={author_name} className="form-control onChange={(e)=>this.setState({author_name:e.target.value})} form-control-sm" type="text"/> <br/>
+                        <label className="form-label"><b>Message Title</b></label>
+                        <textarea value={msg_title} onChange={(e)=>this.setState({msg_title:e.target.value})} className="form-control form-control-sm" type="text"/><br/>
+                         <label className="form-label"><b>Message Body</b></label>
+                        <textarea value={msg_body} onChange={(e)=>this.setState({msg_body:e.target.value})} className="form-control form-control-sm" type="text"/><br/> 
+                        
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button className="btn-sm btn-danger" onClick={this.handleClose}>
+                            Close
+                        </Button>
+                        <button  className="btn btn-sm btn-success"  onClick={this.EditNotification}>
+                            Update
+                        </button>
+                    </Modal.Footer>
+            </Modal>
  		 {this.RedirectToLogin()}
  		</Fragment>
  		)

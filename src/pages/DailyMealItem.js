@@ -227,7 +227,7 @@ class DailyMealItem extends React.Component{
  					</div>
  			</div>
  		</SideBar>
- 		<Modal animation={false} className="animated zoomIn" show={show} onHide={show} backdrop="static">
+ 		<Modal scrollable={true} animation={false} className="animated zoomIn" show={show} onHide={show}>
                     <Modal.Header>
                         <strong><p className="text-danger">মিলের সময়সীমা এবং মূল্য পরিবর্তন করুন</p></strong>
                     </Modal.Header>
@@ -254,7 +254,7 @@ class DailyMealItem extends React.Component{
                         </button>
                     </Modal.Footer>
             </Modal>
-            <Modal animation={false} className="animated zoomIn" show={showMeal} onHide={showMeal} backdrop="static">
+            <Modal scrollable={true} animation={false} className="animated zoomIn" show={showMeal} onHide={showMeal} backdrop="static">
                     <Modal.Header>
                         <strong><p className="text-danger">প্রতিদিনের খাবারের মেন্যু পরিবর্তন করুন</p></strong>
                     </Modal.Header>

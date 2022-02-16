@@ -24,6 +24,11 @@ class api {
 	static RestoreTodayOrder  = this.baseURL + "RestoreTodayOrderedMeal/";
 	static SendMessage   = this.baseURL + "SendMessage";
 	static SendEmailNotification   = this.baseURL + "SendEmailNotification";
+	static GetAllNotificationForAdmin   = this.baseURL + "GetAllNotificationForAdmin/";
+	static DeleteNotification   = this.baseURL + "DeleteNotification/";
+	static GetNotification   = this.baseURL + "GetNotification/";
+	static EditNotification   = this.baseURL + "EditNotification";
+	static GetUserProfile   = this.baseURL + "GetUserProfile/";
 
 }
 

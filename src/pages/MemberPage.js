@@ -41,6 +41,8 @@ class MemberPage extends Component {
             isDisabled : true,
             previewImg : '',
             redirectStatus : false,
+            mainDiv : '',
+            token_view : 'd-none',
 		}
 	}
 	componentDidMount(){
@@ -123,7 +125,7 @@ class MemberPage extends Component {
             this.setState({submitBtnText: 'Update', headerTitle : 'Edit Member'}); 
 	}
     this.setState({addNewModal: true});
-}
+    }
 
 	modalClose=()=>{
 		this.setState({addNewModal: false});
@@ -309,15 +311,36 @@ class MemberPage extends Component {
 
 	}
 
-    printToken=()=>{
-        window.print();
+    printToken=(id)=>{
+        Axios.get(API.GetUserProfile + id)
+        .then(response=>{
+            if(response.status==200)
+            {
+                this.setState({
+                    name : response.data['name'],
+                    token_no : response.data['token_no'],
+                    email : response.data['email'],
+                    phone : response.data['phone'],
+                    previewImg : response.data['photo'],
+                    reg_date : response.data['reg_date']
+
+                })
+
+            }
+        })
+        .catch(error=>{
+
+        })
     }
+
 	imgCellFormat=(cell, rowIndex)=>{
 		return <img className="table-cell-img" src={cell}/>
 	}
+
 	cellFormatter=(cell, rowIndex)=>{
 		return ReactHtmlParser(cell);
 	}
+
     RedirectToLogin=()=>{
         if(this.state.redirectStatus===true)
         {
@@ -325,6 +348,11 @@ class MemberPage extends Component {
                 <Redirect to="/admin_login" />
             )
         }
+    }
+    print=()=>{
+        this.setState({mainDiv : 'd-none', token_view : ''});
+        window.print();
+        this.setState({mainDiv : '', token_view : 'd-none'});
     }
     render() {
     	if(this.state.isLoading==true && this.state.isError==false)
@@ -349,7 +377,7 @@ class MemberPage extends Component {
         }
         else{
 		const allData = this.state.Data;
-        const {name, username, password, token_no, email, phone, role, status, address, photo, previewImg} = this.state;
+        const {name, mainDiv, token_view, reg_date, username, password, token_no, email, phone, role, status, address, photo, previewImg} = this.state;
 		const columns = [
          {dataField: 'photo', text: 'Profile Picture',formatter:this.imgCellFormat},
 		 {dataField: 'token_no', text: 'Token No.'},
@@ -362,6 +390,7 @@ class MemberPage extends Component {
 		  mode: 'radio',
 		  onSelect:(row, isSelect, rowIndex)=>{ 
 		  	this.setState({selectedID : row['id'], isDisabled: false})
+            this.printToken(row['id']);
 		  }
 		  
 		};
@@ -369,12 +398,12 @@ class MemberPage extends Component {
         return (
             <Fragment>
                 <SideBar title="Projects">
-                    <div className="animated zoomIn">
+                    <div className={mainDiv + " animated zoomIn"}>
                         <h2 className="text-center text-danger">All Member List</h2>
                         <Button onClick={this.modalOpen.bind(this, 'Insert')} variant="success" className="btn-sm mr-2">Add</Button>
                         <Button onClick={this.modalOpen.bind(this, 'Update')} variant="info" className="btn-sm ml-2" disabled={this.state.isDisabled}>Edit</Button>
                         <Button onClick={this.onDelete} variant="danger" className="btn-sm ml-2" disabled={this.state.isDisabled}>Delete</Button>
-                        <Button onClick={this.printToken} variant="primary" className="btn-sm ml-2" disabled={this.state.isDisabled}>Print Token</Button><br/><br/>
+                        <Button onClick={this.print} variant="primary" className="btn-sm ml-2" disabled={this.state.isDisabled}>Print Token</Button><br/><br/>
                         <BootstrapTable 
                             keyField='id' 
                             data={ allData } 
@@ -452,6 +481,18 @@ class MemberPage extends Component {
                             </Button>
                         </Modal.Footer>
                     </Modal>
+                     <div className={token_view + " container token_preview card mt-4 col-lg-4 col-md-5 col-sm-8 col-xs-8"}>
+                        <div className="token_section">
+                            <h3 className="text-success text-center m-3"><b>CANTEEN <br/>MANAGEMENT SYSTEM</b></h3><hr/>
+                            <img src={previewImg} className="prevIMG"/>
+                            <hr/>
+                                <h5 className=""><b className="text-muted">Name :</b> <span className="text-muted">{name}</span></h5>
+                                <h5 className=""><b className="text-muted">Email :</b> <span className="text-muted">{email}</span></h5>
+                                <h5 className=""><b className="text-muted">Phone :</b> <span className="text-muted">{phone}</span></h5>
+                                <h5 className=""><b className="text-muted">Reg Date :</b> <span className="text-muted">{reg_date}</span></h5><hr/>
+                            <h2 className="text-danger text-center"><b>TOKEN NO : {token_no}</b></h2>
+                        </div>
+                     </div>
                 {this.RedirectToLogin()}
             </Fragment>
         );

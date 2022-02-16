@@ -7,6 +7,7 @@ import './css/sideNav.css';
 import './css/style.css';
 import './css/fontawesome.css';
 import './css/card.css';
+import './css/globals.css';
 import './css/animate.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-toastify/dist/ReactToastify.css';
