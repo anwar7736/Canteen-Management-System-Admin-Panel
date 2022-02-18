@@ -29,6 +29,12 @@ class api {
 	static GetNotification   = this.baseURL + "GetNotification/";
 	static EditNotification   = this.baseURL + "EditNotification";
 	static GetUserProfile   = this.baseURL + "GetUserProfile/";
+	static GetAllPayments   = this.baseURL + "GetAllPayments";
+	static GetAllPaymentByDate   = this.baseURL + "GetAllPaymentByDate";
+	static DeletePayment   = this.baseURL + "DeletePayment/";
+	static AddPayment   = this.baseURL + "AddPayment";
+	static GetPaymentById   = this.baseURL + "GetPaymentById/";
+	static EditPayment   = this.baseURL + "EditPayment";
 
 }
 

@@ -37,8 +37,8 @@
 .row{
    margin-left: 1000px;
 }
-input[type=text], input[type=password], textarea{
-    border:1px solid green !important;
+input[type=text], input[type=password], select, textarea{
+    border:1px solid gray !important;
 }
 
 .profile-photo{
