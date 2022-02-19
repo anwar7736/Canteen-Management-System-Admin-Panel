@@ -5,6 +5,9 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBars, faHeart, faHome,faEnvelope,faBookOpen,faCode,faFolder,faComment,faPowerOff, faKey} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
+import Axios from 'axios';
+import API from './../api/api';
+
 class SideBar extends Component {
 
     constructor(props) {
@@ -15,7 +18,21 @@ class SideBar extends Component {
             NavText:"d-none",
             mainDivOverlay:"main-overlay-close",
             redirectStatus : false,
+            countLatest : "",
+            user_id : "",
         }
+    }
+
+    componentDidMount(){
+        const user_id = localStorage.getItem('id');
+        this.setState({user_id : user_id});
+        Axios.get(API.CountLastest + user_id)
+            .then(res=>{
+                this.setState({countLatest :  res.data});
+            })
+            .catch(err=>{
+
+            })
     }
 
 
@@ -33,6 +50,21 @@ class SideBar extends Component {
         localStorage.clear();
         this.setState({redirectStatus:true});
     }
+
+    changeLatest=()=>{
+        const {user_id, countLatest} = this.state;
+        if(countLatest !== "")
+        {
+            Axios.get(API.SetUnreadStatus + user_id)
+            .then(res=>{
+                this.componentDidMount();
+            })
+            .catch(err=>{
+
+            });
+        }
+    }
+
     RedirectToLogin=()=>{
         if(this.state.redirectStatus===true)
         {
@@ -43,6 +75,7 @@ class SideBar extends Component {
     }
     render() {
         let user = localStorage.getItem('login');
+        const {countLatest}  = this.state;
         let login_logout = 
             
              !user ? 
@@ -65,7 +98,7 @@ class SideBar extends Component {
 
                 <div className={this.state.sideNavClass}>
                     <NavLink> <Link className="NavItem" to="/"> <FontAwesomeIcon icon={faHome} /> <span className={this.state.NavText}>Home</span> </Link></NavLink>
-                    <NavLink><Link className="NavItem" to="/daily_meal_item"> <FontAwesomeIcon icon={faBookOpen} /> <span className={this.state.NavText}>Notification</span></Link></NavLink>
+                    <NavLink onClick={this.changeLatest} ><Link className="NavItem" to="/notification"> <FontAwesomeIcon icon={faBookOpen} /> <span className={this.state.NavText}>Notification <sup><span className="badge text-white bg-danger" style={{fontSize:'11px'}}>{countLatest == 0 ? "" : countLatest}</span></sup></span></Link></NavLink>
                     <NavLink><Link className="NavItem" to="/member"> <FontAwesomeIcon icon={faEnvelope} /> <span className={this.state.NavText}>Member</span></Link></NavLink>
                     <NavLink><Link className="NavItem" to="/daily_meal_item"> <FontAwesomeIcon icon={faBookOpen} /> <span className={this.state.NavText}>Daily Meal Item</span></Link></NavLink> 
                     <NavLink><Link className="NavItem" to="/send_notification"> <FontAwesomeIcon icon={faHeart} /> <span className={this.state.NavText}>Send Notification</span></Link></NavLink>

@@ -35,6 +35,10 @@ class api {
 	static AddPayment   = this.baseURL + "AddPayment";
 	static GetPaymentById   = this.baseURL + "GetPaymentById/";
 	static EditPayment   = this.baseURL + "EditPayment";
+	static GetAdminNotificationByUser   = this.baseURL + "GetAdminNotificationByUser/";
+	static CountLastest   = this.baseURL + "CountLastestNotification/";
+	static SetUnreadStatus   = this.baseURL + "SetUnreadStatus/";
+	static SetReadStatus   = this.baseURL + "SetReadStatus/";
 
 }
 

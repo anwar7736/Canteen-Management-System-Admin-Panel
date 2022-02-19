@@ -24,15 +24,6 @@ class HomePage extends Component {
             this.setState({redirectStatus: true});
         }
 
-        toast.success('Welcome to our website!', {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: 0,
-                });
         Axios.get('/CountSummary').then((response)=>{
             if(response.status==200){
                 this.setState({dataList:response.data,isLoading:false,isError:false})

@@ -11,6 +11,7 @@ import DailyMealItem from '../pages/DailyMealItem';
 import SendNotification from '../pages/SendNotification';
 import OrderDailyMeal from '../pages/OrderDailyMeal';
 import Payment from '../pages/Payment';
+import Notification from '../pages/Notification';
 
 
 import NotFound from '../pages/NotFound';
@@ -31,6 +32,7 @@ class Routes extends Component {
                 <Route exact path="/send_notification" render={(props)=> <SendNotification {...props} key={ Date.now() } />} />
                 <Route exact path="/order_daily_meal" render={(props)=> <OrderDailyMeal {...props} key={ Date.now() } />} />
                 <Route exact path="/make_payment" render={(props)=> <Payment {...props} key={ Date.now() } />} />
+                <Route exact path="/notification" render={(props)=> <Notification {...props} key={ Date.now() } />} />
                	
 
 

@@ -132,15 +132,16 @@ class SendNotification extends React.Component{
 			let myForm = new FormData();
 		 	myForm.append('msg_title', msg_title);
 		 	myForm.append('msg_body', msg_body);
+		 	myForm.append('receivers', 'ForAllUser');
 
-			 if(receivers.length==0)
-			 {
-			 	myForm.append('receivers', 'ForAllUser');
-			 }
+			 // if(receivers.length==0)
+			 // {
+			 // 	myForm.append('receivers', 'ForAllUser');
+			 // }
 
-			 else{
-			 		myForm.append('receivers', receivers);
-			 }
+			 // else{
+			 // 		myForm.append('receivers', receivers);
+			 // }
 
 			 Axios.post(API.SendEmailNotification, myForm)
 			 	.then(res=>{
@@ -371,7 +372,8 @@ EditNotification=()=>{
 			        <label for="name">From :</label>
 			        <input type="email" class="form-control" value={sender_email}  disabled placeholder="Sender email address..." id="name2"/>
 			      </div>
-			      <div class="form-group">
+			      {/*
+			      	<div class="form-group">
 			        <label for="name">To :</label>
 			        <label>
 			        	<input type="radio" className="ml-3" checked={customChecked}name="via" onClick={(e)=>this.onshowReceivers('custom')} id="custom" value=""/> Custom
@@ -381,6 +383,7 @@ EditNotification=()=>{
 			        </label>
 			        <input type="text" className={showReceiver + " form-control"} value={receivers}  onChange={(e)=>this.setState({receivers:e.target.value})} placeholder="Enter receivers mail address..." id="name"/>
 			      </div>
+			      */}
 			      <div class="form-group">
 			        <label for="title">Message Title :</label>
 			        <input type="text" class="form-control" value={msg_title}  onChange={(e)=>this.setState({msg_title:e.target.value})} placeholder="Enter message title..." id="title"/>

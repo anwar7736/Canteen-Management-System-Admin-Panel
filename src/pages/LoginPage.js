@@ -20,8 +20,8 @@ class LoginPage extends Component {
 	constructor(){
 		super()
 		this.state = {
-			username : '',
-            password : '',
+			username : 'admin1234',
+            password : '123',
             redirectStatus : false,
 
 		}
@@ -60,14 +60,11 @@ class LoginPage extends Component {
             .then(response=>{
                 if(response.status==200 && response.data!==0)
                 {
-                    cogoToast.success('Login Successfully');
-                    setTimeout(()=>{
-                        localStorage.setItem('login', username);
-                        localStorage.setItem('id', response.data['id']);
-                        localStorage.setItem('email', response.data['email']);
-                        localStorage.setItem('phone', response.data['phone']);
-                        this.setState({redirectStatus:true});
-                    },1000);
+                    localStorage.setItem('login', username);
+                    localStorage.setItem('id', response.data['id']);
+                    localStorage.setItem('email', response.data['email']);
+                    localStorage.setItem('phone', response.data['phone']);
+                    this.setState({redirectStatus:true});
                 }
                 else
                 {
@@ -88,6 +85,7 @@ class LoginPage extends Component {
         }
     }
     render(){
+        const {username, password} = this.state;
         return (
             <Fragment>
                 <SideBar title="Admin Login">
@@ -98,12 +96,12 @@ class LoginPage extends Component {
                                 <Form onSubmit={this.AdminLogin}>
                                     <Form.Group className="mb-3" controlId="formBasicEmail">
                                         <Form.Label>Username</Form.Label>
-                                        <Form.Control type="text"  onChange={(e)=>{this.setState({username : e.target.value})}} placeholder="Enter Your Username...."/>
+                                        <Form.Control type="text"  value={username} onChange={(e)=>{this.setState({username : e.target.value})}} placeholder="Enter Your Username...."/>
                                     </Form.Group>
 
                                     <Form.Group className="mb-3" controlId="formBasicPassword">
                                     <Form.Label>Password</Form.Label>
-                                        <Form.Control onChange={(e)=>{this.setState({password : e.target.value})}} type="password" placeholder="Enter Your Password..." />
+                                        <Form.Control value={password} onChange={(e)=>{this.setState({password : e.target.value})}} type="password" placeholder="Enter Your Password..." />
                                     </Form.Group> 
                                     <Button className="btn-block mb-2" variant="success" type="submit">
                                         LOGIN
