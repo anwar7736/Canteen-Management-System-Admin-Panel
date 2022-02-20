@@ -62,45 +62,70 @@ class HomePage extends Component {
                 		 <Container fluid={true} className="animated zoomIn">
                             <Row>
                                 <Col className="p-2" md={3} log={3} sm={6}>
-                                    <Card className="card bg-success">
+                                    <Card className="card text-center">
                                         <Card.Body>
-                                            <h5 className="title-text">{data['contact']}</h5>
-                                            <h5 className="des-text text-dark">Contact Request</h5>
+                                            <h5 className="title-text">0</h5>
+                                            <h5 className="des-text text-danger"><b>Total Customer</b></h5>
                                         </Card.Body>
                                     </Card>
                                 </Col>
                                 <Col className="p-2" md={3} log={3} sm={6}>
-                                    <Card className="card bg-info">
+                                    <Card className="card text-center">
                                         <Card.Body>
-                                            <h5 className="title-text text-white">{data['course']}</h5>
-                                            <h5 className="des-text text-white">Total Courses</h5>
+                                            <h5 className="title-text">0</h5>
+                                            <h5 className="des-text text-danger"><b>Total Meal</b></h5>
                                         </Card.Body>
                                     </Card>
                                 </Col>
                                 <Col className="p-2" md={3} log={3} sm={6}>
-                                    <Card className="card bg-secondary">
+                                    <Card className="card text-center">
                                         <Card.Body>
-                                            <h5 className="title-text text-success">{data['project']}</h5>
-                                            <h5 className="des-text text-success">Total Projects</h5>
+                                            <h5 className="title-text">0</h5>
+                                            <h5 className="des-text text-danger"><b>Total Cancel Meal</b></h5>
                                         </Card.Body>
                                     </Card>
                                 </Col>
                                 <Col className="p-2" md={3} log={3} sm={6}>
-                                    <Card className="card bg-warning">
+                                    <Card className="card text-center">
                                         <Card.Body>
-                                            <h5 className="title-text text-info">{data['review']}</h5>
-                                            <h5 className="des-text text-info">Total Review</h5>
+                                            <h5 className="title-text">0</h5>
+                                            <h5 className="des-text text-danger"><b>Total Bazar Cost</b></h5>
                                         </Card.Body>
                                     </Card>
                                 </Col>
                                 <Col className="p-2" md={3} log={3} sm={6}>
-                                    <Card className="card bg-dark">
+                                    <Card className="card text-center">
                                         <Card.Body>
-                                            <h5 className="title-text text-danger">{data['service']}</h5>
-                                            <h5 className="des-text text-danger">Total Services</h5>
+                                            <h5 className="title-text">0</h5>
+                                            <h5 className="des-text text-danger"><b>Total Earnings</b></h5>
                                         </Card.Body>
                                     </Card>
                                 </Col>
+                                <Col className="p-2" md={3} log={3} sm={6}>
+                                    <Card className="card text-center">
+                                        <Card.Body>
+                                            <h5 className="title-text">0</h5>
+                                            <h5 className="des-text text-danger"><b>Total Previous Due</b></h5>
+                                        </Card.Body>
+                                    </Card>
+                                </Col>
+                                <Col className="p-2" md={3} log={3} sm={6}>
+                                    <Card className="card text-center">
+                                        <Card.Body>
+                                            <h5 className="title-text">0</h5>
+                                            <h5 className="des-text text-danger"><b>Today Lunch Order</b></h5>
+                                        </Card.Body>
+                                    </Card>
+                                </Col>
+                                <Col className="p-2" md={3} log={3} sm={6}>
+                                    <Card className="card text-center">
+                                        <Card.Body>
+                                            <h5 className="title-text">0</h5>
+                                            <h5 className="des-text text-danger"><b>Today Dinner Order</b></h5>
+                                        </Card.Body>
+                                    </Card>
+                                </Col>
+                                
                             </Row>
                         </Container>
                 </SideBar>

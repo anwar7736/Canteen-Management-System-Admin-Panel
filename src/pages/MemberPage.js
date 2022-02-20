@@ -446,14 +446,14 @@ class MemberPage extends Component {
                                 </Form.Group> 
                                 <Form.Group >
                                     <Form.Label>Role</Form.Label>
-                                     <select onChange={(e)=>this.setState({role : e.target.value})} className="form-control">
+                                     <select value={role} onChange={(e)=>this.setState({role : e.target.value})} className="form-control">
                                         <option value="user">User</option>
                                         <option value="admin">Admin</option>
                                      </select>
                                 </Form.Group> 
                                 <Form.Group >
                                     <Form.Label>Status</Form.Label>
-                                    <select onChange={(e)=>this.setState({role : e.target.value})} className="form-control">
+                                    <select value={status} onChange={(e)=>this.setState({status : e.target.value})} className="form-control">
                                         <option value="active">Active</option>
                                         <option value="inactive">Inactive</option>
                                      </select>
