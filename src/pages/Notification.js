@@ -75,7 +75,7 @@ class Notification extends React.Component{
 		})
 		return(
 				<>
-				<SideBar title="Change Password">
+				<SideBar title="Notification">
 					<h2 className="text-center m-3 text-danger">All Notification From Customer</h2>
 					{notification_item}
 				</SideBar>

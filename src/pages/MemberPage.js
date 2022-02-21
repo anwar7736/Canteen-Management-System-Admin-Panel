@@ -1,6 +1,4 @@
 import React, {Component, Fragment} from 'react';
-import Loading from '../components/loadingDiv';
-import Error from '../components/wentWrong';
 import {Button, Modal, Form, Container} from 'react-bootstrap';
 import SideBar from '../components/SideBar';
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -21,8 +19,6 @@ class MemberPage extends Component {
 		super()
 		this.state = {
 			Data : [],
-			isLoading : true,
-			isError : false,
             action : '',
             name : '',
             username : '',
@@ -355,27 +351,7 @@ class MemberPage extends Component {
         this.setState({mainDiv : '', token_view : 'd-none'});
     }
     render() {
-    	if(this.state.isLoading==true && this.state.isError==false)
-        {
-            return (
-                    <SideBar title="Projects">   
-                        <Container>
-                            <Loading/>
-                        </Container>
-                    </SideBar>
-                )
-        }
-        else if(this.state.isError==true && this.state.isLoading==false)
-        {
-              return (
-                    <SideBar title="Projects">   
-                        <Container>
-                            <Error/>
-                        </Container>
-                    </SideBar>
-                )
-        }
-        else{
+
 		const allData = this.state.Data;
         const {name, mainDiv, token_view, reg_date, username, password, token_no, email, phone, role, status, address, photo, previewImg} = this.state;
 		const columns = [
@@ -397,7 +373,7 @@ class MemberPage extends Component {
 
         return (
             <Fragment>
-                <SideBar title="Projects">
+                <SideBar title="Customer">
                     <div className={mainDiv + " animated zoomIn"}>
                         <h2 className="text-center text-danger">All Member List</h2>
                         <Button onClick={this.modalOpen.bind(this, 'Insert')} variant="success" className="btn-sm mr-2">Add</Button>
@@ -496,7 +472,7 @@ class MemberPage extends Component {
                 {this.RedirectToLogin()}
             </Fragment>
         );
-        }
+        
      }
     
 }

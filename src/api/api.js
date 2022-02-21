@@ -39,6 +39,9 @@ class api {
 	static CountLastest   = this.baseURL + "CountLastestNotification/";
 	static SetUnreadStatus   = this.baseURL + "SetUnreadStatus/";
 	static SetReadStatus   = this.baseURL + "SetReadStatus/";
+	static AdminDashboardSummary   = this.baseURL + "AdminDashboardSummary";
+	static GetAllMealDetails   = this.baseURL + "GetAllMealDetails";
+	static GetMealByFilter   = this.baseURL + "GetMealByFilter";
 
 }
 

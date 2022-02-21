@@ -198,7 +198,7 @@ class DailyMealItem extends React.Component{
  	},this)
  	return(
  		<Fragment>
- 		<SideBar title="Contact">
+ 		<SideBar title="Day Wise Meal Item">
  			<div className="mt-3 animated zoomIn" style={{marginBottom:'100px'}}>
  					<center>
 	 					<h6 className="text-muted">দুপুরের খাবার গ্রহণের শেষ সময়ঃ <span className="text-danger">{lunch_expiry_time}</span></h6><br/>

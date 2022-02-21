@@ -250,7 +250,7 @@ class OrderDailyMeal extends React.Component{
         ];
  	return(
  		<Fragment>
-               <SideBar title="Reset Password">
+               <SideBar title="Order Daily Meal">
  			 <div className="container-fluid mt-3 animated zoomIn">
                                             <h3 className="text-danger text-center">Place Today Order</h3><br/>
                                            <p className= {undoBtn + " text-center text-success"} > <strong>Your today order has been deleted!</strong> <span className="text-danger" onClick={this.restoreOrder} style={{cursor:'pointer'}}>Undo</span></p>

@@ -301,7 +301,7 @@ class Payment extends React.Component{
 
  	return(
  		<Fragment>
-            <SideBar title="Contact">
+            <SideBar title="Make Payment">
  			  <div className="container-fluid animated zoomIn transaction-preview">
                    <button onClick={this.handleOpen} className="btn btn-info">Add New Payment</button>
                     <h3 className="heading-title text-danger text-center m-3">All Payment Details</h3><hr/>

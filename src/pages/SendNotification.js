@@ -328,7 +328,7 @@ EditNotification=()=>{
         ];
  	return(
  		<Fragment>
- 		<SideBar title="Contact">
+ 		<SideBar title="Send Notification">
 			<div class="row animated zoomIn">
 				<div class="col-md-6 container-fluid m-4">
 			<h4 className="text-danger"><center>Send Notification</center></h4>
