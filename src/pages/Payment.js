@@ -305,11 +305,17 @@ class Payment extends React.Component{
  			  <div className="container-fluid animated zoomIn transaction-preview">
                    <button onClick={this.handleOpen} className="btn btn-info">Add New Payment</button>
                     <h3 className="heading-title text-danger text-center m-3">All Payment Details</h3><hr/>
-                    <div className="input-group">
-                        From : <input value={from_date} onChange={(e)=> {this.setState({from_date:e.target.value})}} className="w-25 form-control form-control-sm mx-2" type="date"/>
-                        To : <input value={to_date} onChange={(e)=> {this.setState({to_date:e.target.value})}} className="w-25 form-control form-control-sm mx-2" type="date"/>
-                        <button onClick={this.filterByDate} className="btn btn-sm btn-success mx-2">Filter</button>
-                        <button onClick={this.resetForm} className="btn btn-sm btn-danger mx-2">Refresh</button>
+                    <div className="input-group row">
+                        <div className="col-md-4 ">
+                          From : <input value={from_date} onChange={(e)=> {this.setState({from_date:e.target.value})}} className=" form-control form-control-sm mx-2" type="date"/>
+                        </div>
+                        <div className="col-md-4 ">
+                          To : <input value={to_date} onChange={(e)=> {this.setState({to_date:e.target.value})}} className=" form-control form-control-sm mx-2" type="date"/>
+                        </div>
+                        <div className="col-md-4">
+                          <button onClick={this.filterByDate} className="btn btn-sm btn-success mx-2 mt-4">Filter</button>
+                          <button onClick={this.resetForm} className="btn btn-sm btn-danger mx-2 mt-4">Refresh</button>
+                        </div>
                     </div>
                 </div>
                 <hr/>

@@ -103,7 +103,7 @@ class LoginPage extends Component {
                                     <Form.Label>Password</Form.Label>
                                         <Form.Control value={password} onChange={(e)=>{this.setState({password : e.target.value})}} type="password" placeholder="Enter Your Password..." />
                                     </Form.Group> 
-                                    <Button className="btn-block mb-2" variant="success" type="submit">
+                                    <Button className="btn form-control mb-2" variant="success" type="submit">
                                         LOGIN
                                     </Button>
                                     <div className="text-center text-danger">

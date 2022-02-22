@@ -123,7 +123,7 @@ class ChangePassword extends Component {
                                     <Form.Label>Confirm Password</Form.Label>
                                         <Form.Control onChange={(e)=>{this.setState({confirmPass : e.target.value})}} type="password" placeholder="Re-type New Password" />
                                     </Form.Group>
-                                    <Button className="btn-block" variant="success" type="submit">
+                                    <Button className="btn form-control" variant="success" type="submit">
                                         Update Now
                                     </Button>
                                 </Form>

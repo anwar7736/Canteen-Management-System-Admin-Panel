@@ -100,7 +100,7 @@ class EmailVerify extends Component {
                                         <Form.Label>Email Address</Form.Label>
                                         <Form.Control type="text"  onChange={(e)=>{this.setState({email : e.target.value})}} placeholder="Enter Your Email Address Here...."/>
                                     </Form.Group>
-                                    <Button className="btn-block mb-2" variant="success" type="submit">
+                                    <Button className="btn form-control mb-2" variant="success" type="submit">
                                         NEXT
                                     </Button>
                                     <div className="text-center text-danger">

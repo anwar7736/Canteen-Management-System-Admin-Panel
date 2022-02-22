@@ -376,10 +376,10 @@ class MemberPage extends Component {
                 <SideBar title="Customer">
                     <div className={mainDiv + " animated zoomIn"}>
                         <h2 className="text-center text-danger">All Member List</h2>
-                        <Button onClick={this.modalOpen.bind(this, 'Insert')} variant="success" className="btn-sm mr-2">Add</Button>
-                        <Button onClick={this.modalOpen.bind(this, 'Update')} variant="info" className="btn-sm ml-2" disabled={this.state.isDisabled}>Edit</Button>
-                        <Button onClick={this.onDelete} variant="danger" className="btn-sm ml-2" disabled={this.state.isDisabled}>Delete</Button>
-                        <Button onClick={this.print} variant="primary" className="btn-sm ml-2" disabled={this.state.isDisabled}>Print Token</Button><br/><br/>
+                        <Button onClick={this.modalOpen.bind(this, 'Insert')} variant="success" className="btn-sm m-1">Add</Button>
+                        <Button onClick={this.modalOpen.bind(this, 'Update')} variant="info" className="btn-sm m-1" disabled={this.state.isDisabled}>Edit</Button>
+                        <Button onClick={this.onDelete} variant="danger" className="btn-sm m-1" disabled={this.state.isDisabled}>Delete</Button>
+                        <Button onClick={this.print} variant="primary" className="btn-sm m-1" disabled={this.state.isDisabled}>Print Token</Button><br/><br/>
                         <BootstrapTable 
                             keyField='id' 
                             data={ allData } 
@@ -445,7 +445,7 @@ class MemberPage extends Component {
                                     <img className={previewImg + " mt-3"} src={photo} width="100" height="100"/>
                                 </Form.Group>
 
-                                <Button className="btn-block" variant="info" type="submit">
+                                <Button className="btn form-control mt-4" variant="info" type="submit">
                                     {this.state.submitBtnText}
                                 </Button>
 

@@ -357,7 +357,7 @@ EditNotification=()=>{
 			        </textarea>
 			      </div>
 			      <button type="submit" class="btn btn-success">Send</button>
-			   	  <button type="button" onClick={this.clearForm} class="btn btn-danger ml-3">Clear</button>
+			   	  <button type="button" onClick={this.clearForm} class="btn btn-danger m-2">Clear</button>
 			    </form>   
 
 
@@ -394,7 +394,7 @@ EditNotification=()=>{
 			        </textarea>
 			      </div>
 			      <button type="submit" class="btn btn-success">Send</button>
-			      <button type="button" onClick={this.clearForm} class="btn btn-danger ml-3">Clear</button>
+			      <button type="button" onClick={this.clearForm} class="btn btn-danger m-2">Clear</button>
 			    </form> 
 			</div>
 			</div>
