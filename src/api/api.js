@@ -42,6 +42,12 @@ class api {
 	static AdminDashboardSummary   = this.baseURL + "AdminDashboardSummary";
 	static GetAllMealDetails   = this.baseURL + "GetAllMealDetails";
 	static GetMealByFilter   = this.baseURL + "GetMealByFilter";
+	static GetAllBazarCost   = this.baseURL + "GetAllBazarCost";
+	static GetBazarCostByDate   = this.baseURL + "GetBazarCostByDate";
+	static AddDailyBazarCost   = this.baseURL + "AddDailyBazarCost";
+	static GetBazarCostById   = this.baseURL + "GetBazarCostById";
+	static EditDailyBazarCost   = this.baseURL + "EditDailyBazarCost";
+	static DeleteDailyBazarCost   = this.baseURL + "DeleteDailyBazarCost";
 
 }
 

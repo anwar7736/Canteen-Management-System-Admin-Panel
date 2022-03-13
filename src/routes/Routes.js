@@ -13,6 +13,7 @@ import OrderDailyMeal from '../pages/OrderDailyMeal';
 import Payment from '../pages/Payment';
 import Notification from '../pages/Notification';
 import DayWiseMeal from '../pages/DayWiseMeal';
+import DailyBazar from '../pages/DailyBazar';
 
 
 import NotFound from '../pages/NotFound';
@@ -35,6 +36,7 @@ class Routes extends Component {
                 <Route exact path="/day_wise_meal_report" render={(props)=> <DayWiseMeal {...props} key={ Date.now() } />} />
                 <Route exact path="/make_payment" render={(props)=> <Payment {...props} key={ Date.now() } />} />
                 <Route exact path="/notification" render={(props)=> <Notification {...props} key={ Date.now() } />} />
+                <Route exact path="/daily_bazar_cost" render={(props)=> <DailyBazar {...props} key={ Date.now() } />} />
                	
 
 
