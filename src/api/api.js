@@ -48,6 +48,8 @@ class api {
 	static GetBazarCostById   = this.baseURL + "GetBazarCostById";
 	static EditDailyBazarCost   = this.baseURL + "EditDailyBazarCost";
 	static DeleteDailyBazarCost   = this.baseURL + "DeleteDailyBazarCost";
+	static GetProfileInfo   = this.baseURL + "GetProfileInfo";
+	static UpdateAdminProfile   = this.baseURL + "UpdateAdminProfile";
 
 }
 
