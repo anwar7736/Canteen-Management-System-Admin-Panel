@@ -19,6 +19,7 @@ class api {
     static OrderDailyMeal  = this.baseURL + "OrderDailyMeal";
 	static GetTodayAllOrderInfo  = this.baseURL + "GetTodayAllOrderInfo";
 	static GetTodayOrderInfoByOrderId  = this.baseURL + "GetTodayOrderInfoByOrderId/";
+	static GetMealByOrderId  = this.baseURL + "GetMealByOrderId/";
 	static ChangeOrderedMeal  = this.baseURL + "ChangeOrderedMeal";
 	static DeleteTodayOrder  = this.baseURL + "DeleteTodayOrderedMeal/";
 	static RestoreTodayOrder  = this.baseURL + "RestoreTodayOrderedMeal/";
@@ -48,6 +49,7 @@ class api {
 	static GetBazarCostById   = this.baseURL + "GetBazarCostById";
 	static EditDailyBazarCost   = this.baseURL + "EditDailyBazarCost";
 	static DeleteDailyBazarCost   = this.baseURL + "DeleteDailyBazarCost";
+    static GetShopName   = this.baseURL + "GetProfileInfo";
 	static GetProfileInfo   = this.baseURL + "GetProfileInfo";
 	static UpdateAdminProfile   = this.baseURL + "UpdateAdminProfile";
 

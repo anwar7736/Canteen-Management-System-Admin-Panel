@@ -33,6 +33,14 @@ class SideBar extends Component {
             .catch(err=>{
 
             })
+
+        Axios.get(API.GetShopName)
+        .then(response=>{
+            localStorage.setItem('shop_name', response.data[0]['shop_name']);
+        })
+        .catch(error=>{
+
+        });
     }
 
 
@@ -47,7 +55,10 @@ class SideBar extends Component {
 
     Logout=()=>
     {
-        localStorage.clear();
+        localStorage.removeItem('id');
+        localStorage.removeItem('email');
+        localStorage.removeItem('login');
+        localStorage.removeItem('phone');
         this.setState({redirectStatus:true});
     }
 
@@ -93,7 +104,7 @@ class SideBar extends Component {
                 <title>{this.props.title}</title>
                 <Navbar  expand="lg" className="fixed-top shadow-sm bg-white mb-5 py-3" variant="light" bg="white">
                     <Navbar.Brand onClick={this.showHideSideNav} style={{cursor:'pointer'}}><FontAwesomeIcon icon={faBars} /></Navbar.Brand>
-                    <b className="text-danger">Canteen Management System</b>
+                    <b className="text-danger">{localStorage.getItem('shop_name')}</b>
                 </Navbar>
 
                 <div className={this.state.sideNavClass}>
@@ -104,7 +115,7 @@ class SideBar extends Component {
                     <NavLink><Link className="NavItem" to="/send_notification"> <FontAwesomeIcon icon={faEnvelope} /> <span className={this.state.NavText}>Send Notification</span></Link></NavLink>
                     <NavLink><Link className="NavItem" to="/make_payment"> <FontAwesomeIcon icon={faShoppingCart} /> <span className={this.state.NavText}>Make Payment</span></Link></NavLink>
                     <NavLink><Link className="NavItem" to="/order_daily_meal"> <FontAwesomeIcon icon={faComment} /> <span className={this.state.NavText}>Order Daily Meal</span></Link></NavLink>
-                    <NavLink><Link className="NavItem" to="/day_wise_meal_report"> <FontAwesomeIcon icon={faComment} /> <span className={this.state.NavText}>Day Wise Meal Report</span></Link></NavLink>
+                    <NavLink><Link className="NavItem" to="/day_wise_meal_report"> <FontAwesomeIcon icon={faComment} /> <span className={this.state.NavText}>Daily Meal Report</span></Link></NavLink>
                     <NavLink><Link className="NavItem" to="/daily_bazar_cost"> <FontAwesomeIcon icon={faComment} /> <span className={this.state.NavText}>Daily Bazar Cost</span></Link></NavLink>
                     <NavLink><Link className="NavItem" to="/review"> <FontAwesomeIcon icon={faComment} /> <span className={this.state.NavText}>Database Backup</span></Link></NavLink>
                     <NavLink><Link className="NavItem" to="/changePassword"> <FontAwesomeIcon icon={faKey} /> <span className={this.state.NavText}>Change Password</span></Link></NavLink>

@@ -39,10 +39,10 @@ class DailyMealItem extends React.Component{
 			{
 				this.setState({data: res.data});
 			}
-			else cogoToast.error('Something went wrong!');
+			
 		})
 		.catch(err=>{
-			cogoToast.error('Something went wrong!');
+			
 		});
 
 		Axios.get(API.GetMealRate)
@@ -59,10 +59,10 @@ class DailyMealItem extends React.Component{
 					meal_rate_id : res.data[0].id,
 				});
 			}
-			else cogoToast.error('Something went wrong!');
+			
 		})
 		.catch(err=>{
-			cogoToast.error('Something went wrong!');
+			
 		});
 	}
 

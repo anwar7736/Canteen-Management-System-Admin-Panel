@@ -11,9 +11,15 @@ class DayWiseMeal extends React.Component{
         state={
             dataTable : [],
             user_id   : '',
+            name : '',
+            order_id  : '',
             from_date : '',
             to_date   : '',
             token_no  : '',
+            lunch     : '',
+            dinner    : '',
+            notes     : '',
+            show      : false,
         }
 
         componentDidMount=()=>{
@@ -27,6 +33,14 @@ class DayWiseMeal extends React.Component{
            
          })
      }
+
+    handleClose=()=>{
+        this.setState({show:false, order_id : '', notes : '', lunch:'', dinner:'', order_id:'',token_no:''});
+     }
+
+    handleOpen=()=>{
+        this.setState({ show:true});
+    }
 
        resetForm=()=>{
             this.setState({from_date : '', to_date : '', token_no : ''});
@@ -56,8 +70,29 @@ class DayWiseMeal extends React.Component{
            }
          } 
 
+
+       viewIconOnClick=(order_id)=>{
+           this.handleOpen();
+           this.setState({order_id:order_id});
+           Axios.get(API.GetMealByOrderId + order_id)
+                     .then(response=>{
+                             this.setState({
+                                name: response.data[0].name,
+                                token_no: response.data[0].token_no,
+                                lunch: response.data[0].lunch,
+                                dinner: response.data[0].dinner,
+                                notes : response.data[0].notes,
+                            })
+                     })
+                     .catch(error=>{
+                        cogoToast.error('Something went wrong!');
+                     })
+        }
+
  render(){
-    const {from_date, to_date, token_no} = this.state;
+    const {from_date, to_date, show, lunch, dinner, notes, token_no, name} = this.state;
+    const date = new Date();
+ const order_date = date.getDate() + "-" + date.getMonth() + "-" + date.getFullYear();
     const columns = [
             {
                 name: 'Meal Take Date',
@@ -90,6 +125,12 @@ class DayWiseMeal extends React.Component{
                 selector: 'total_amount',
                 sortable: true,
             },
+            {
+                name: 'View Details',
+                selector: 'id',
+                sortable: false,
+                cell: row => <button onClick={this.viewIconOnClick.bind(this,row.id)}  className="btn btn-sm text-success"><i className="fa fa-book"/></button>
+            },
         ];
 
  	return(
@@ -103,7 +144,7 @@ class DayWiseMeal extends React.Component{
                             To : <input value={to_date} onChange={(e)=> {this.setState({to_date:e.target.value})}} className=" form-control form-control-sm mx-2" type="date"/>
                        </div>
                        <div className="col-md-4">
-                            Token No : <input value={token_no} onChange={(e)=> {this.setState({token_no:e.target.value})}} className=" form-control form-control-sm mx-2" type="text"/>
+                            Token No : <input value={token_no} onChange={(e)=> {this.setState({token_no:e.target.value})}} placeholder="Token No..." className=" form-control form-control-sm mx-2" type="text"/>
                        </div>
                        <div className="col-md-6">
                             <button onClick={this.filterByDate} className="btn btn-sm btn-success m-2">Filter</button>
@@ -123,6 +164,31 @@ class DayWiseMeal extends React.Component{
                 <br/>
                 <br/>
         </SideBar>
+        <Modal animation={false} className="animated zoomIn" show={show} onHide={show}>
+                    <Modal.Header>
+                        <strong><p className="text-danger">View Order Details</p></strong>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <label className="form-label"><b>Customer Name</b></label>
+                        <input value={name} disabled className="form-control form-control-sm" type="text"/> 
+                        <label className="form-label "><b>Customer Token No</b></label>
+                        <input value={token_no} disabled className="form-control form-control-sm" type="text"/>
+                         <label className="form-label"><b>Meal Order Date</b></label>
+                        <input value={order_date} disabled className="form-control form-control-sm" type="text"/><br/>
+                        <label className="form-label"><b>Ordered Meal Quantity</b></label><br/>
+                        <label className="form-label"><b>Lunch</b></label><br/>
+                        <input type="text" disabled className="form-control" value={lunch}/><br/>
+                        <label className="form-label"><b>Dinner</b></label><br/>
+                        <input type="text" disabled className="form-control form-control-sm" value={dinner}/><br/><br/>
+                        <label className="form-label"><b>Notes</b></label><br/>
+                        <textarea value={notes} disabled className="form-control form-control-sm" placeholder="No notes are available..."/>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button className="btn-sm btn-danger" onClick={this.handleClose}>
+                            Close
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
  		</Fragment>
  		)
  }
