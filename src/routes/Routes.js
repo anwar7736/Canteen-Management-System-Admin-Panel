@@ -6,7 +6,7 @@ import EmailVerify from '../pages/EmailVerify';
 import OTPVerify from '../pages/OTPVerify';
 import ForgetPassword from '../pages/ForgetPassword';
 import ChangePassword from '../pages/ChangePassword';
-import MemberPage from '../pages/MemberPage';
+import CustomerPage from '../pages/CustomerPage';
 import DailyMealItem from '../pages/DailyMealItem';
 import SendNotification from '../pages/SendNotification';
 import OrderDailyMeal from '../pages/OrderDailyMeal';
@@ -30,7 +30,7 @@ class Routes extends Component {
                 <Route exact path="/otp_verification" render={(props)=> <OTPVerify {...props} key={ Date.now() } />} />
                 <Route exact path="/forget_password" render={(props)=> <ForgetPassword {...props} key={ Date.now() } />} />
                 <Route exact path="/changePassword" render={(props)=> <ChangePassword {...props} key={ Date.now() } />} />
-                <Route exact path="/member" render={(props)=> <MemberPage {...props} key={ Date.now() } />} />
+                <Route exact path="/customer" render={(props)=> <CustomerPage {...props} key={ Date.now() } />} />
                 <Route exact path="/daily_meal_item" render={(props)=> <DailyMealItem {...props} key={ Date.now() } />} />
                 <Route exact path="/send_notification" render={(props)=> <SendNotification {...props} key={ Date.now() } />} />
                 <Route exact path="/order_daily_meal" render={(props)=> <OrderDailyMeal {...props} key={ Date.now() } />} />

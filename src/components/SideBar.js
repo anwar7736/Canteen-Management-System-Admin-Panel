@@ -46,7 +46,7 @@ class SideBar extends Component {
 
     showHideSideNav=()=>{
         if(this.state.sideNav===false){
-            this.setState({sideNav:true,NavText:"",sideNavClass:"sidenavOpen",mainDivOverlay:"main-overlay-open"})
+            this.setState({sideNav:true,NavText:"",sideNavClass:"sidenavOpen",mainDivOverlay:"main-overlay-close"})
         } 
         else {
             this.setState({sideNav:false,NavText:"d-none",sideNavClass:"sidenavClose",mainDivOverlay:"main-overlay-close"})
@@ -110,7 +110,7 @@ class SideBar extends Component {
                 <div className={this.state.sideNavClass}>
                     <NavLink> <Link className="NavItem" to="/"> <FontAwesomeIcon icon={faHome} /> <span className={this.state.NavText}>Home</span> </Link></NavLink>
                     <NavLink onClick={this.changeLatest} ><Link className="NavItem" to="/notification"> <FontAwesomeIcon icon={faHeart} /> <span className={this.state.NavText}>Notification <sup><span className="badge text-white bg-danger" style={{fontSize:'11px'}}>{countLatest == 0 ? "" : countLatest}</span></sup></span></Link></NavLink>
-                    <NavLink><Link className="NavItem" to="/member"> <FontAwesomeIcon icon={faUser} /> <span className={this.state.NavText}>Customer</span></Link></NavLink>
+                    <NavLink><Link className="NavItem" to="/customer"> <FontAwesomeIcon icon={faUser} /> <span className={this.state.NavText}>Customer</span></Link></NavLink>
                     <NavLink><Link className="NavItem" to="/daily_meal_item"> <FontAwesomeIcon icon={faBookOpen} /> <span className={this.state.NavText}>Daily Meal Item</span></Link></NavLink> 
                     <NavLink><Link className="NavItem" to="/send_notification"> <FontAwesomeIcon icon={faEnvelope} /> <span className={this.state.NavText}>Send Notification</span></Link></NavLink>
                     <NavLink><Link className="NavItem" to="/make_payment"> <FontAwesomeIcon icon={faShoppingCart} /> <span className={this.state.NavText}>Make Payment</span></Link></NavLink>

@@ -14,7 +14,7 @@ import 'react-quill/dist/quill.snow.css';
 import ReactHtmlParser from 'react-html-parser';
 import {Redirect} from 'react-router';
 import API from './../api/api';
-class MemberPage extends Component {
+class CustomerPage extends Component {
 	constructor(){
 		super()
 		this.state = {
@@ -375,7 +375,7 @@ class MemberPage extends Component {
             <Fragment>
                 <SideBar title="Customer">
                     <div className={mainDiv + " animated zoomIn"}>
-                        <h2 className="text-center text-danger">All Member List</h2>
+                        <h2 className="text-center text-danger">All Customer List</h2>
                         <Button onClick={this.modalOpen.bind(this, 'Insert')} variant="success" className="btn-sm m-1">Add</Button>
                         <Button onClick={this.modalOpen.bind(this, 'Update')} variant="info" className="btn-sm m-1" disabled={this.state.isDisabled}>Edit</Button>
                         <Button onClick={this.onDelete} variant="danger" className="btn-sm m-1" disabled={this.state.isDisabled}>Delete</Button>
@@ -477,4 +477,4 @@ class MemberPage extends Component {
     
 }
 
-export default MemberPage;
+export default CustomerPage;
