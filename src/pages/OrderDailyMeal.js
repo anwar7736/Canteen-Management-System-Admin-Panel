@@ -23,6 +23,8 @@ class OrderDailyMeal extends React.Component{
             btnText : 'Save Order',
             undoBtn : 'd-none',
             redirectStatus : false,
+            yes : false,
+            no  : true
 
         }
     componentDidMount(){
@@ -52,7 +54,7 @@ class OrderDailyMeal extends React.Component{
 
     onSubmitHandler=()=>
     {
-        const {lunch, dinner, notes, editID, user_id, token_no} = this.state;
+        const {lunch, dinner, notes, editID, yes, user_id, token_no} = this.state;
         if(token_no == '')
         {
             cogoToast.warn('Token no is required!')
@@ -66,6 +68,7 @@ class OrderDailyMeal extends React.Component{
             myOrder.append('token_no', token_no);
             myOrder.append('lunch', Number(lunch));
             myOrder.append('dinner', Number(dinner));
+            myOrder.append('parcel', Number(yes));
             myOrder.append('notes', notes);
             console.log(myOrder);
            Axios.post(API.OrderDailyMeal, myOrder)
@@ -93,17 +96,20 @@ class OrderDailyMeal extends React.Component{
             editOrder.append("token_no", token_no);
             editOrder.append("lunch", Number(lunch));
             editOrder.append("dinner", Number(dinner));
+            editOrder.append('parcel', Number(yes));
             editOrder.append('notes', notes);
              Axios.post(API.ChangeOrderedMeal, editOrder)
                  .then(response=>{
                     if(response.status==200 && response.data==1)
                     {
+                          this.resetForm();
                          this.handleClose();
                          cogoToast.success('Today order updated successfully');
                          this.componentDidMount();
 
                     }
                     else{
+                        this.resetForm();
                         this.handleClose();
                          cogoToast.info('Nothing to Changes');
                     }
@@ -116,7 +122,7 @@ class OrderDailyMeal extends React.Component{
      }
     }
     resetForm=()=>{
-        this.setState({token_no: '', lunch : '0',dinner : '0', notes : '', btnText : 'Save Order', modalTitle : 'Order Today Meal', editID : '', deleteID : ''});
+        this.setState({token_no: '', lunch : '0',dinner : '0', yes : false, no : true, notes : '', btnText : 'Save Order', modalTitle : 'Order Today Meal', editID : '', deleteID : ''});
     }
 
     handleClose=()=>{
@@ -172,6 +178,13 @@ class OrderDailyMeal extends React.Component{
        this.setState({editID:id, modalTitle : 'Update Today Order', btnText : 'Update Order'})
        Axios.get(API.GetTodayOrderInfoByOrderId + id)
                  .then(response=>{
+                         if(response.data[0].is_parcel==="Yes")
+                         {
+                            this.setState({yes : true, no : false});
+                         }
+                         else {
+                             this.setState({yes : false, no : true});
+                         }
                          this.setState({
                             lunch: response.data[0].lunch,
                             dinner: response.data[0].dinner,
@@ -194,9 +207,20 @@ class OrderDailyMeal extends React.Component{
         }
     }
 
+    parcelStatus=(status)=>{
+        if(status === 'Yes')
+        {
+            this.setState({yes : true, no : false});
+        }
+        else
+        {
+            this.setState({yes : false, no : true});
+        }
+    }
+
  render(){
     const date = new Date();
-    const {lunch, dinner, notes, btnText, dataTable, show, name, token_no, isDisabled, undoBtn} = this.state;
+    const {lunch, dinner, notes, btnText, dataTable, yes, no, show, name, token_no, isDisabled, undoBtn} = this.state;
 
     const order_date = date.getDate() + "-" + date.getMonth() + "-" + date.getFullYear();
 
@@ -232,6 +256,16 @@ class OrderDailyMeal extends React.Component{
                 selector: 'total_amount',
                 sortable: true,
             },
+            {
+                name: 'Is_Parcel',
+                selector: 'is_parcel',
+                sortable: true,
+            }, 
+            {
+                name: 'Status',
+                selector: 'status',
+                sortable: true,
+            }, 
             {
                 name: 'Delete',
                 selector: 'id',
@@ -278,15 +312,18 @@ class OrderDailyMeal extends React.Component{
                         <input value={name} disabled className="form-control form-control-sm" type="text"/> 
                         <label className="form-label"><b>Your Token No</b></label>
                         <input value={token_no} onChange={(e)=> {this.setState({token_no:e.target.value})}} className="form-control form-control-sm" type="text"/>
-                         <label className="form-label"><b>Meal Order Date</b></label>
+                        <label className="form-label"><b>Meal Order Date</b></label>
                         <input value={order_date} disabled className="form-control form-control-sm" type="text"/><br/>
                         <label className="form-label"><b>Enter Your Meal Quantity</b></label><br/>
                         <label className="form-label"><b>Lunch</b></label><br/>
                         <input type="number" min="0" max="5" onChange={(e)=> {this.setState({lunch:e.target.value})}} value={lunch}/><br/>
                         <label className="form-label"><b>Dinner</b></label><br/>
                         <input type="number" min="0" max="5" onChange={(e)=> {this.setState({dinner:e.target.value})}} value={dinner}/><br/><br/>
-                        <label className="form-label"><b>Add Notes (If Any)</b></label><br/>
-                        <textarea onChange={(e)=> {this.setState({notes:e.target.value})}} value={notes} placeholder="Enter your notes.."/>
+                        <label className="form-label"><b>Do you want to take parcel?</b></label><br/>
+                        <label><input type="radio" name="parcel" onClick={(e)=>this.parcelStatus('Yes')} checked={yes}/> Yes</label><br/>
+                        <label><input type="radio" name="parcel" onClick={(e)=>this.parcelStatus('No')} checked={no}/> No</label><br/>
+                        <label className="form-label mt-2"><b>Add Notes (If Any)</b></label><br/>
+                        <textarea onChange={(e)=> {this.setState({notes:e.target.value})}} className="form-control" value={notes} placeholder="Enter your notes.."/>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button className="btn-sm btn-danger" onClick={this.handleClose}>

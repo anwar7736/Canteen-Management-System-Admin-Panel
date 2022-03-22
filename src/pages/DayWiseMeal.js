@@ -11,15 +11,26 @@ class DayWiseMeal extends React.Component{
         state={
             dataTable : [],
             user_id   : '',
-            name : '',
+            name      : '',
+            address   : '',
+            phone     : '',
             order_id  : '',
             from_date : '',
             to_date   : '',
             token_no  : '',
+            total_amount : '',
+            total_lunch : '',
+            total_dinner : '',
+            total_meal : '',
             lunch     : '',
             dinner    : '',
             notes     : '',
             show      : false,
+            is_parcel : '',
+            meal_status : '',
+            mainDiv   : '',
+            print_view : 'd-none',
+
         }
 
         componentDidMount=()=>{
@@ -33,6 +44,28 @@ class DayWiseMeal extends React.Component{
            
          })
      }
+
+    changeStatus=()=>{
+        const {meal_status, order_id} = this.state;
+        Axios.post(API.ChangeMealStatus, {order_id:order_id, meal_status:meal_status})
+         .then(response=>{
+            if(response.status == 200 && response.data==1)
+            {
+                this.handleClose();
+                this.resetForm();
+                this.componentDidMount();
+                cogoToast.success('Meal Status Changed Successfully');
+            }
+            else
+            {
+                cogoToast.error('Something went wrong!');
+            }
+
+         })
+         .catch(error=>{
+           cogoToast.error('Something went wrong!');
+         })
+    }
 
     handleClose=()=>{
         this.setState({show:false, order_id : '', notes : '', lunch:'', dinner:'', order_id:'',token_no:''});
@@ -70,18 +103,52 @@ class DayWiseMeal extends React.Component{
            }
          } 
 
+       printIconOnClick=(order_id)=>{
+          Axios.get(API.GetMealByOrderId + order_id)
+             .then(response=>{
+                     this.setState({
+                        name: response.data[0].name,
+                        phone: response.data[0].phone,
+                        address: response.data[0].address,
+                        token_no: response.data[0].token_no,
+                        total_lunch: response.data[0].lunch,
+                        total_dinner: response.data[0].dinner,
+                        total_meal: response.data[0].total_meal,
+                        total_amount : response.data[0].total_amount,
+                    })
+             })
+             .catch(error=>{
+                
+             })
+
+            setTimeout(()=>{
+                this.setState({mainDiv : 'd-none', print_view : ''});
+                window.print();
+                this.setState({mainDiv : '', print_view : 'd-none'});
+                this.resetForm();
+            },300);
+       }
 
        viewIconOnClick=(order_id)=>{
            this.handleOpen();
            this.setState({order_id:order_id});
            Axios.get(API.GetMealByOrderId + order_id)
                      .then(response=>{
+                             if(response.data[0].is_parcel==="Yes")
+                             {
+                                 this.setState({is_parcel : "Parcel"});
+                             }
+                             else
+                             {
+                                  this.setState({is_parcel : "Not Parcel"});
+                             }
                              this.setState({
                                 name: response.data[0].name,
                                 token_no: response.data[0].token_no,
                                 lunch: response.data[0].lunch,
                                 dinner: response.data[0].dinner,
                                 notes : response.data[0].notes,
+                                meal_status : response.data[0].status,
                             })
                      })
                      .catch(error=>{
@@ -90,9 +157,9 @@ class DayWiseMeal extends React.Component{
         }
 
  render(){
-    const {from_date, to_date, show, lunch, dinner, notes, token_no, name} = this.state;
+    const {from_date, to_date, show, is_parcel, phone, total_lunch, total_dinner, address, total_meal, total_amount, mainDiv, print_view, lunch, meal_status, dinner, notes, token_no, name} = this.state;
     const date = new Date();
- const order_date = date.getDate() + "-" + date.getMonth() + "-" + date.getFullYear();
+    const order_date = date.getDate() + "-" + date.getMonth() + "-" + date.getFullYear();
     const columns = [
             {
                 name: 'Meal Take Date',
@@ -126,17 +193,33 @@ class DayWiseMeal extends React.Component{
                 sortable: true,
             },
             {
+                name: 'Is_Parcel',
+                selector: 'is_parcel',
+                sortable: true,
+            }, 
+            {
+                name: 'Status',
+                selector: 'status',
+                sortable: true,
+            }, 
+            {
                 name: 'View Details',
                 selector: 'id',
                 sortable: false,
                 cell: row => <button onClick={this.viewIconOnClick.bind(this,row.id)}  className="btn btn-sm text-success"><i className="fa fa-book"/></button>
+            },
+            {
+                name: 'Print Details',
+                selector: 'id',
+                sortable: false,
+                cell: row => <button onClick={this.printIconOnClick.bind(this,row.id)}  className="btn btn-sm text-danger"><i className="fa fa-book"/></button>
             },
         ];
 
  	return(
  		<Fragment>
             <SideBar title="Day Wise Meal Details">
- 			  <div className="container-fluid animated zoomIn transaction-preview">
+ 			  <div className={mainDiv + " container-fluid animated zoomIn transaction-preview"}>
                     <h3 className="heading-title text-danger text-center m-3">Day Wise Meal Report</h3><hr/>
                     <div className="input-group row">
                        <div className="col-md-4">
@@ -151,8 +234,6 @@ class DayWiseMeal extends React.Component{
                             <button onClick={this.resetForm} className="btn btn-sm btn-danger m-2">Refresh</button>
                        </div>
                     </div>
-                </div>
-                <hr/>
                     <DataTable
                         noHeader={true}
                         paginationPerPage={5}
@@ -160,6 +241,9 @@ class DayWiseMeal extends React.Component{
                         columns={columns}
                         data={this.state.dataTable}
                     />
+                </div>
+                <hr/>
+                    
                 <br/>
                 <br/>
                 <br/>
@@ -180,15 +264,43 @@ class DayWiseMeal extends React.Component{
                         <input type="text" disabled className="form-control" value={lunch}/><br/>
                         <label className="form-label"><b>Dinner</b></label><br/>
                         <input type="text" disabled className="form-control form-control-sm" value={dinner}/><br/><br/>
+                        <label className="form-label"><b>Meal Collecting Way (Parcel/Not Parcel)</b></label><br/>
+                        <h5 className="text-danger">{is_parcel}</h5>
                         <label className="form-label"><b>Notes</b></label><br/>
                         <textarea value={notes} disabled className="form-control form-control-sm" placeholder="No notes are available..."/>
+                        <label className="form-label"><b>Meal Status</b></label> 
+                        <select value={meal_status} className="form-control" onChange={(e)=>this.setState({meal_status:e.target.value})}>
+                            <option value="Completed">Completed</option>
+                            <option value="Processing">Processing</option>
+                            <option value="Pending">Pending</option>
+                        </select><br/>
                     </Modal.Body>
                     <Modal.Footer>
+                        <Button className="btn-sm btn-success" onClick={this.changeStatus}>
+                            Update
+                        </Button>
                         <Button className="btn-sm btn-danger" onClick={this.handleClose}>
                             Close
                         </Button>
                     </Modal.Footer>
                 </Modal>
+                  <div className={print_view + " container token_preview card mt-4 col-lg-4 col-md-5 col-sm-8 col-xs-8"}>
+                    <div className="token_section">
+                        <h3 className="text-success text-center m-3"><b>CANTEEN <br/>MANAGEMENT SYSTEM</b></h3><hr/>
+                        <h3 className="text-danger text-center m-3"><b>Customer Order Details</b></h3><hr/>
+                        <hr/>
+                            <h5 className=""><b className="text-muted">Name :</b> <span className="text-muted">{name}</span></h5>
+                            <h5 className=""><b className="text-muted">Phone :</b> <span className="text-muted">{phone}</span></h5>
+                            <h5 className=""><b className="text-muted">Token No :</b> <span className="text-muted">{token_no}</span></h5>
+                            <h5 className=""><b className="text-muted">Address :</b> <span className="text-muted">{address}</span></h5>
+                            <h5 className=""><b className="text-muted">Lunch :</b> <span className="text-muted">{total_lunch}</span></h5>
+                            <h5 className=""><b className="text-muted">Dinner :</b> <span className="text-muted">{total_dinner}</span></h5>
+                            <h5 className=""><b className="text-muted">Total Meal :</b> <span className="text-muted">{total_meal}</span></h5>
+                            <h5 className=""><b className="text-muted">Total Amount :</b> <span className="text-muted">{total_amount}</span></h5><hr/><br/><br/><br/><br/>
+                            <h5 className=""><b className="text-muted">Signature of Customer</b></h5><hr/>
+
+                    </div>
+                 </div>
  		</Fragment>
  		)
  }

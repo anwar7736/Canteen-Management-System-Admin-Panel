@@ -337,7 +337,8 @@ class Payment extends React.Component{
                     <Modal.Body>
                         <label className="form-label"><b>Token No</b></label>
                         <input value={token_no} onChange={(e)=> {this.setState({token_no:e.target.value})}} className="form-control form-control-sm" type="text"/><br/>
-                              <label className="form-label"><b>Payment Year</b></label> <select value={selected_year} className="form-control" onChange={(e)=> this.setState({selected_year : e.target.value})}>
+                              <label className="form-label"><b>Payment Year</b></label> 
+                              <select value={selected_year} className="form-control" onChange={(e)=> this.setState({selected_year : e.target.value})}>
                                 <option value="" selected disabled>Choose Year</option>
                                 {
                                     years.map((year)=>{

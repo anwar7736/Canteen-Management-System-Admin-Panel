@@ -376,10 +376,10 @@ EditNotification=()=>{
 			      	<div class="form-group">
 			        <label for="name">To :</label>
 			        <label>
-			        	<input type="radio" className="ml-3" checked={customChecked}name="via" onClick={(e)=>this.onshowReceivers('custom')} id="custom" value=""/> Custom
+			        	<input type="radio" className="ml-3" checked={customChecked} name="via" onClick={(e)=>this.onshowReceivers('custom')} id="custom" value=""/> Custom
 			        </label>
 			        <label>
-			        	<input type="radio" className="ml-3" checked={allChecked}name="via" onClick={(e)=>this.onshowReceivers('all')} id="all" value=""/> All
+			        	<input type="radio" className="ml-3" checked={allChecked} name="via" onClick={(e)=>this.onshowReceivers('all')} id="all" value=""/> All
 			        </label>
 			        <input type="text" className={showReceiver + " form-control"} value={receivers}  onChange={(e)=>this.setState({receivers:e.target.value})} placeholder="Enter receivers mail address..." id="name"/>
 			      </div>

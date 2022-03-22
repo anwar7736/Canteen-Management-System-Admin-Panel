@@ -52,6 +52,7 @@ class api {
     static GetShopName   = this.baseURL + "GetProfileInfo";
 	static GetProfileInfo   = this.baseURL + "GetProfileInfo";
 	static UpdateAdminProfile   = this.baseURL + "UpdateAdminProfile";
+	static ChangeMealStatus   = this.baseURL + "ChangeMealStatus";
 
 }
 
