@@ -136,11 +136,11 @@ class DayWiseMeal extends React.Component{
                      .then(response=>{
                              if(response.data[0].is_parcel==="Yes")
                              {
-                                 this.setState({is_parcel : "Parcel"});
+                                 this.setState({is_parcel : "Home Delivery"});
                              }
                              else
                              {
-                                  this.setState({is_parcel : "Not Parcel"});
+                                  this.setState({is_parcel : ""});
                              }
                              this.setState({
                                 name: response.data[0].name,
@@ -193,7 +193,7 @@ class DayWiseMeal extends React.Component{
                 sortable: true,
             },
             {
-                name: 'Is_Parcel',
+                name: 'Home Delivery',
                 selector: 'is_parcel',
                 sortable: true,
             }, 
@@ -264,7 +264,7 @@ class DayWiseMeal extends React.Component{
                         <input type="text" disabled className="form-control" value={lunch}/><br/>
                         <label className="form-label"><b>Dinner</b></label><br/>
                         <input type="text" disabled className="form-control form-control-sm" value={dinner}/><br/><br/>
-                        <label className="form-label"><b>Meal Collecting Way (Parcel/Not Parcel)</b></label><br/>
+                        <label className="form-label"><b>Meal Collecting Way</b></label><br/>
                         <h5 className="text-danger">{is_parcel}</h5>
                         <label className="form-label"><b>Notes</b></label><br/>
                         <textarea value={notes} disabled className="form-control form-control-sm" placeholder="No notes are available..."/>

@@ -257,7 +257,7 @@ class OrderDailyMeal extends React.Component{
                 sortable: true,
             },
             {
-                name: 'Is_Parcel',
+                name: 'Home Delivery',
                 selector: 'is_parcel',
                 sortable: true,
             }, 
@@ -319,7 +319,7 @@ class OrderDailyMeal extends React.Component{
                         <input type="number" min="0" max="5" onChange={(e)=> {this.setState({lunch:e.target.value})}} value={lunch}/><br/>
                         <label className="form-label"><b>Dinner</b></label><br/>
                         <input type="number" min="0" max="5" onChange={(e)=> {this.setState({dinner:e.target.value})}} value={dinner}/><br/><br/>
-                        <label className="form-label"><b>Do you want to take parcel?</b></label><br/>
+                        <label className="form-label"><b>Do you want to take home delivery?</b></label><br/>
                         <label><input type="radio" name="parcel" onClick={(e)=>this.parcelStatus('Yes')} checked={yes}/> Yes</label><br/>
                         <label><input type="radio" name="parcel" onClick={(e)=>this.parcelStatus('No')} checked={no}/> No</label><br/>
                         <label className="form-label mt-2"><b>Add Notes (If Any)</b></label><br/>
