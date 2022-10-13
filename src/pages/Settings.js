@@ -119,8 +119,8 @@ class Settings extends Component {
         return (
             <Fragment>
               <SideBar title="Settings">
-                 <div className="row">
-                    <div className="bg-light mt-4 offset-3 col-md-6 animated zoomIn">
+                 <div className="">
+                    <div className="bg-light mt-4 animated zoomIn">
                         <Form onSubmit={this.onSubmitHandler}>
                                 <h5 className="text-success text-center m-4"><b>Admin Profile</b></h5><hr/>
                           <Form.Group controlId="formBasicPassword" className="mb-3">

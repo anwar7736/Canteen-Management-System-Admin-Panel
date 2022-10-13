@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import SideBar from '../components/SideBar';
-import {Card, Col, Container, Row} from "react-bootstrap";
+import {div, Col, Container, Row} from "react-bootstrap";
 import Axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import {Redirect} from 'react-router';
@@ -68,78 +68,71 @@ class HomePage extends Component {
         return (
             <Fragment>
             	<SideBar title="Home">
-                		 <Container fluid={true} className="animated zoomIn">
+                		 <div className="container-fluid animated zoomIn">
                                         <h4 className="text-center bg-danger text-light p-2 my-2">Admin Dashboard</h4>
              <h3 className="text-center bg-light text-success p-2 my-2">Month of <span>{months[new Date().getMonth()]}</span> <span className="text-danger">{new Date().getFullYear()}</span></h3>
              <hr/>
-                            <Row>
-                                <Col className="p-2" md={3} log={3} sm={6}>
-                                    <Card className="card text-center">
-                                        <Card.Body>
+                                    
+                                        <div className="card text-center m-1">
+                                        <div className="card-body">
                                             <h5 className="title-text">{total_customer}</h5>
                                             <h5 className="des-text text-danger"><b>Total Customer</b></h5>
-                                        </Card.Body>
-                                    </Card>
-                                </Col>
-                                <Col className="p-2" md={3} log={3} sm={6}>
-                                    <Card className="card text-center">
-                                        <Card.Body>
+                                        </div>
+                                    </div>
+                               
+                                    <div className="card text-center m-1">
+                                        <div className="card-body">
                                             <h5 className="title-text">{total_meal}</h5>
                                             <h5 className="des-text text-danger"><b>Total Meal</b></h5>
-                                        </Card.Body>
-                                    </Card>
-                                </Col>
-                                <Col className="p-2" md={3} log={3} sm={6}>
-                                    <Card className="card text-center">
-                                        <Card.Body>
+                                        </div>
+                                    </div>
+                            
+                                    <div className="card text-center m-1">
+                                        <div className="card-body">
                                             <h5 className="title-text">{total_cancel_meal}</h5>
                                             <h5 className="des-text text-danger"><b>Total Cancel Meal</b></h5>
-                                        </Card.Body>
-                                    </Card>
-                                </Col>
-                                <Col className="p-2" md={3} log={3} sm={6}>
-                                    <Card className="card text-center">
-                                        <Card.Body>
+                                        </div>
+                                    </div>
+                              
+                                    <div className="card text-center m-1">
+                                        <div className="card-body">
                                             <h5 className="title-text">{total_bazar_cost}TK</h5>
                                             <h5 className="des-text text-danger"><b>Total Bazar Cost</b></h5>
-                                        </Card.Body>
-                                    </Card>
-                                </Col>
-                                <Col className="p-2" md={3} log={3} sm={6}>
-                                    <Card className="card text-center">
-                                        <Card.Body>
+                                        </div>
+                                    </div>
+                             
+                                    <div className="card text-center m-1">
+                                        <div className="card-body">
                                             <h5 className="title-text">{total_earnings}TK</h5>
                                             <h5 className="des-text text-danger"><b>Total Earnings</b></h5>
-                                        </Card.Body>
-                                    </Card>
-                                </Col>
-                                <Col className="p-2" md={3} log={3} sm={6}>
-                                    <Card className="card text-center">
-                                        <Card.Body>
+                                        </div>
+                                    </div>
+                              
+                                    <div className="card text-center m-1">
+                                        <div className="card-body">
                                             <h5 className="title-text">{total_user_due}TK</h5>
                                             <h5 className="des-text text-danger"><b>Total Previous User Due</b></h5>
-                                        </Card.Body>
-                                    </Card>
-                                </Col>
-                                <Col className="p-2" md={3} log={3} sm={6}>
-                                    <Card className="card text-center">
-                                        <Card.Body>
+                                        </div>
+                                    </div>
+                              
+                                    <div className="card text-center m-1">
+                                        <div className="card-body">
                                             <h5 className="title-text">{today_lunch_order}</h5>
                                             <h5 className="des-text text-danger"><b>Today Lunch Order</b></h5>
-                                        </Card.Body>
-                                    </Card>
-                                </Col>
-                                <Col className="p-2" md={3} log={3} sm={6}>
-                                    <Card className="card text-center">
-                                        <Card.Body>
+                                        </div>
+                                    </div>
+                               
+                                    <div className="card text-center m-1">
+                                        <div className="card-body">
                                             <h5 className="title-text">{today_dinner_order}</h5>
                                             <h5 className="des-text text-danger"><b>Today Dinner Order</b></h5>
-                                        </Card.Body>
-                                    </Card>
-                                </Col>
+                                        </div>
+                                    </div>
+                                    
                                 
-                            </Row>
-                        </Container>
+                                
+                            
+                        </div>
                 </SideBar>
                 {this.RedirectToLogin()}
             </Fragment>

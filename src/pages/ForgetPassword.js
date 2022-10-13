@@ -114,8 +114,6 @@ class ForgetPassword extends Component {
             <Fragment>
                 <SideBar title="Reset Password">
                     <Container className="animated zoomIn">
-                        <Row>
-                            <Col xl={6} lg={6} md={{w:8, offset:3}} sm={12} xs={12}>
                                 <h4 className="text-danger mb-4">Step 03 : Reset Password</h4>
                                 <Form onSubmit={this.onResetPassword}>
                                 <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -139,8 +137,6 @@ class ForgetPassword extends Component {
                                         <span ><Link to="/email_verification">Back to Email Verify</Link></span>
                                     </div>
                                 </Form>
-                            </Col>
-                        </Row>
                     </Container>
                 </SideBar>
                 {this.RedirectToLogin()}

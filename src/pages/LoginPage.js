@@ -90,8 +90,6 @@ class LoginPage extends Component {
             <Fragment>
                 <SideBar title="Admin Login">
                     <Container className="animated zoomIn">
-                        <Row>
-                            <Col xl={6} lg={6} md={{w:8, offset:3}} sm={12} xs={12}>
                                 <h2 className="text-danger mb-4 text-center">Admin Login</h2>
                                 <Form onSubmit={this.AdminLogin}>
                                     <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -110,8 +108,6 @@ class LoginPage extends Component {
                                         <span ><Link to="/email_verification">Forgotten Password?</Link></span>
                                     </div>
                                 </Form>
-                            </Col>
-                        </Row>
                     </Container>
                 </SideBar>
                 {this.RedirectToHome()}

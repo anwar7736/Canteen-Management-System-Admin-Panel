@@ -329,13 +329,14 @@ EditNotification=()=>{
  	return(
  		<Fragment>
  		<SideBar title="Send Notification">
-			<div class="row animated zoomIn">
-				<div class="col-md-6 container-fluid m-4">
+			<div class="animated zoomIn">
+				<div class=" container-fluid m-4">
 			<h4 className="text-danger"><center>Send Notification</center></h4>
 			<hr/>
 			  <div class="tab">
 			    <button class="tablinks active" onClick={(event)=>this.sendVia(event, 'database')}>Database</button>
 			    <button class="tablinks" onClick={(event)=>this.sendVia(event, 'email')}>E-mail</button>
+			    <button class="tablinks" onClick={(event)=>this.sendVia(event, 'sms')}>SMS</button>
 			  </div>
 
 			<div id="database" class="tabcontent" style={{display:'block'}}>
@@ -397,8 +398,42 @@ EditNotification=()=>{
 			      <button type="button" onClick={this.clearForm} class="btn btn-danger m-2">Clear</button>
 			    </form> 
 			</div>
+		<div id="sms" class="tabcontent">
+					<br/>
+			   <h5><center>Notification Send via SMS</center></h5>
+			    <hr/>
+			  <form method="POST" onSubmit={this.sendEmail}>
+			      <div class="form-group">
+			        <label for="name">From :</label>
+			        <input type="text" class="form-control" value={sender_mobile}  disabled placeholder="Sender phone number..." id="name2"/>
+			      </div>
+			      {/*
+			      	<div class="form-group">
+			        <label for="name">To :</label>
+			        <label>
+			        	<input type="radio" className="ml-3" checked={customChecked} name="via" onClick={(e)=>this.onshowReceivers('custom')} id="custom" value=""/> Custom
+			        </label>
+			        <label>
+			        	<input type="radio" className="ml-3" checked={allChecked} name="via" onClick={(e)=>this.onshowReceivers('all')} id="all" value=""/> All
+			        </label>
+			        <input type="text" className={showReceiver + " form-control"} value={receivers}  onChange={(e)=>this.setState({receivers:e.target.value})} placeholder="Enter receivers mail address..." id="name"/>
+			      </div>
+			      */}
+			      <div class="form-group">
+			        <label for="title">Message Title :</label>
+			        <input type="text" class="form-control" value={msg_title}  onChange={(e)=>this.setState({msg_title:e.target.value})} placeholder="Enter message title..." id="title"/>
+			      </div>
+			      <div class="form-group">
+			        <label for="body">Message Body :</label>
+			        <textarea rows="5" class="form-control" value={msg_body}  onChange={(e)=>this.setState({msg_body:e.target.value})} id="body">
+			        </textarea>
+			      </div>
+			      <button type="submit" class="btn btn-success">Send</button>
+			      <button type="button" onClick={this.clearForm} class="btn btn-danger m-2">Clear</button>
+			    </form> 
 			</div>
-			<div class="col-md-5 m-4">
+		<div class="">
+			<div class=" m-4">
 			<h4 className="text-danger"><center>All Sending Notification List</center></h4><hr/>
 				  <DataTable
 	                noHeader={true}
@@ -406,6 +441,8 @@ EditNotification=()=>{
 	                pagination={true}
 	                columns={columns}
 	                data={data} />
+			</div>
+			</div>
 			</div>
 			</div>
  		</SideBar>

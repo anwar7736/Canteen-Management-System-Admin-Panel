@@ -91,9 +91,8 @@ class EmailVerify extends Component {
         return (
             <Fragment>
                 <SideBar title="Email Verification">
-                    <Container className="animated zoomIn">
-                        <Row>
-                            <Col xl={6} lg={6} md={{w:8, offset:3}} sm={12} xs={12}>
+                    <div className="container animated zoomIn">
+
                                 <h4 className="text-danger mb-4">Step 01 : Email Verification</h4>
                                 <Form onSubmit={this.EmailVerify}>
                                     <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -107,9 +106,7 @@ class EmailVerify extends Component {
                                         <span ><Link to="/admin_login">Back to Login</Link></span>
                                     </div>
                                 </Form>
-                            </Col>
-                        </Row>
-                    </Container>
+                    </div>
                 </SideBar>
                 {this.RedirectToOTPPage()}
                 {this.RedirectToHome()}

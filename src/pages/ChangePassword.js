@@ -106,8 +106,6 @@ class ChangePassword extends Component {
             <Fragment>
                 <SideBar title="Change Password">
                     <Container className="animated zoomIn">
-                        <Row>
-                            <Col xl={6} lg={6} md={{w:8, offset:3}} sm={12} xs={12}>
                                 <h4 className="text-danger mb-5">Change Password</h4>
                                 <Form onSubmit={this.ChangePassword}>
                                     <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -127,8 +125,6 @@ class ChangePassword extends Component {
                                         Update Now
                                     </Button>
                                 </Form>
-                            </Col>
-                        </Row>
                     </Container>
                 </SideBar>
                 {this.RedirectToLogin()}
